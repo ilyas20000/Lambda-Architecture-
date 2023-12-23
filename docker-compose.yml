@@ -1,0 +1,210 @@
+version: '3.8'
+
+
+services:
+  namenode:
+    image: fjardim/namenode_sqoop
+    container_name: namenode
+    hostname: namenode
+    volumes:
+      - ./data/hdfs/namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=finnhub_cluster
+    env_file:
+      - ./data/hadoop/hadoop-hive.env
+    ports:
+      - "5000:50070"
+
+  datanode:
+    image: fjardim/datanode
+    container_name: datanode
+    hostname: datanode
+    volumes:
+      - ./data/hdfs/datanode:/hadoop/dfs/data
+      #- ./data/hadoop/bank:/bank
+    env_file:
+      - ./data/hadoop/hadoop-hive.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
+    depends_on:
+      - namenode
+    ports:
+      - "5075:50075"
+  hue:
+    image: fjardim/hue
+    hostname: hue
+    container_name: hue
+    dns: 8.8.8.8
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data/hue/hue-overrides.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on:
+      - "database"
+
+
+  database:
+    image: fjardim/mysql
+    container_name: database
+    hostname: database
+    ports:
+      - "33061:3306"
+    command: mysqld --innodb-flush-method=O_DSYNC --innodb-use-native-aio=OFF --init-file /data/application/init.sql
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+      - ./data/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: hue
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+
+  hive-server:
+    image: fjardim/hive
+    container_name: hive-server
+    hostname: hive_server
+    env_file:
+      - ./data/hadoop/hadoop-hive.env
+    environment:
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    ports:
+      - "10001:10000"
+    depends_on:
+      - hive-metastore
+    volumes:
+      - ./data/teste:/teste
+
+
+  hive-metastore:
+    image: fjardim/hive
+    container_name: hive_metastore
+    hostname: hive_metastore
+    env_file:
+      - ./data/hadoop/hadoop-hive.env
+    command: /opt/hive/bin/hive --service metastore
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432"
+    ports:
+      - "9083:9083"
+    depends_on:
+      - hive-metastore-postgresql
+
+
+  hive-metastore-postgresql:
+    image: fjardim/hive-metastore
+    container_name: hive-metastore-postgresql
+    hostname: hive_metastore_postgresql
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql/data
+    depends_on:
+      - datanode
+
+  #  postgres:
+#    image: postgres:alpine
+#    environment:
+#      POSTGRES_USER: airflow
+#      POSTGRES_PASSWORD: airflow
+#      POSTGRES_DB: airflow
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres-db-volume:/var/lib/postgresql/data
+#    healthcheck:
+#      test: ["CMD", "pg_isready", "-U", "airflow"]
+#      interval: 10s
+#      retries: 5
+#      start_period: 5s
+#    restart: always
+
+
+
+
+
+
+
+  
+    
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: ktech_zookeeper
+    ports:
+      - "2181:2181"
+    restart: unless-stopped
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_CREATE_TOPICS: "speed_topic:1:1,batch_topic:1:1"
+      KAFKA_LOG_RETENTION_HOURS: 1
+      KAFKA_LOG_RETENTION_BYTES: 4073741824
+      KAFKA_LOG_SEGMENT_BYTES: 1273741824
+      KAFKA_RETENTION_CHECK_INTERVAL_MS: 300000
+      KAFKA_LISTENERS: PLAINTEXT://kafka:9092                         # the list of addresses on which the Kafka broker will listen on for incoming connections.
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  producer:
+    image: lambda-producer:1.0
+    container_name: producer
+    depends_on:
+      - kafka
+
+  sleek-airflow:
+    image: lambda-airflow:1.0
+    volumes:
+      - ./airflow/logs:/opt/airflow/logs
+      - ./batchLayer/dags:/opt/airflow/dags
+      - ./parquet:/tmp/batchViews
+    environment:
+      - SPARK_HOME=/opt/spark
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_LOCAL_IP=spark
+      - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false      
+    ports:
+      - "8089:8080"
+    command: airflow standalone  
+
+
+  spark:
+    image: bitnami/spark
+    container_name: spark
+    environment:
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    depends_on:
+      - namenode
+
+  spark-worker:
+    image: bitnami/spark
+    container_name: spark-worker
+    environment:
+      - SPARK_WORKER_PORT=8881
+      - SPARK_WORKER_WEBUI_PORT=8081
+    depends_on:
+      - spark
+      - datanode
+
+  
+
+
+
+
+
+
+volumes:
+  postgres-db-volume:
+

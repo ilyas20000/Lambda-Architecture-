@@ -1,0 +1,7 @@
+websocket-client
+confluent_kafka
+pyhive
+pyspark
+apache-airflow-providers-apache-spark
+thrift
+thrift_sasl
