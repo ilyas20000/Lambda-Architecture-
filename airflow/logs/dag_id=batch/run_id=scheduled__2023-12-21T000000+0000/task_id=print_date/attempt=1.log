@@ -1,0 +1,336 @@
+[2023-12-22T19:30:24.096+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:30:24.159+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:30:24.160+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T19:30:24.175+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): print_date> on 2023-12-21 00:00:00+00:00
+[2023-12-22T19:30:24.179+0000] {standard_task_runner.py:60} INFO - Started process 135 to run task
+[2023-12-22T19:30:24.182+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch', 'print_date', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/batchlayer.py', '--cfg-path', '/tmp/tmprjoy2_xr']
+[2023-12-22T19:30:24.184+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask print_date
+[2023-12-22T19:30:24.263+0000] {task_command.py:423} INFO - Running <TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T19:30:24.490+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch' AIRFLOW_CTX_TASK_ID='print_date' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T19:30:24.506+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.510+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.512+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.513+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.514+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.515+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.516+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.517+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.518+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.519+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.520+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.521+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.522+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.523+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.524+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.525+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.525+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.527+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.528+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.529+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.530+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.530+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.531+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.532+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.533+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.534+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.535+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.536+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.537+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.538+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.539+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.540+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.541+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.542+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.543+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.544+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.545+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.545+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.547+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.548+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.549+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.550+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.551+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.552+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.553+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.554+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.555+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.556+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.557+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.558+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.559+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.560+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.561+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.561+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.563+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.564+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.566+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.567+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.568+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.569+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.570+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.571+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.572+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.573+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.574+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.575+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.576+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.577+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.578+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.579+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.580+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.581+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.582+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.583+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.584+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.585+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.586+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.587+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.588+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.589+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.590+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.591+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.592+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.593+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.594+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.595+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.596+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.597+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.598+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.599+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.600+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.601+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.602+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.603+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.605+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.606+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.607+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.608+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.609+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T19:30:25.611+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-22T19:30:25.617+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch, task_id=print_date, execution_date=20231221T000000, start_date=20231222T193024, end_date=20231222T193025
+[2023-12-22T19:30:25.679+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-22T19:30:25.691+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T21:57:35.136+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T21:57:35.154+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T21:57:35.155+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T21:57:35.190+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): print_date> on 2023-12-21 00:00:00+00:00
+[2023-12-22T21:57:35.199+0000] {standard_task_runner.py:60} INFO - Started process 135 to run task
+[2023-12-22T21:57:35.203+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch', 'print_date', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/batchlayer.py', '--cfg-path', '/tmp/tmpz293g28y']
+[2023-12-22T21:57:35.207+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask print_date
+[2023-12-22T21:57:35.292+0000] {task_command.py:423} INFO - Running <TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [running]> on host f9bc372cbc19
+[2023-12-22T21:57:35.534+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch' AIRFLOW_CTX_TASK_ID='print_date' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T21:57:35.555+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.562+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.564+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.566+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.568+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.570+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.574+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.576+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.579+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.581+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.583+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.585+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.587+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.589+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.592+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.594+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.597+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.599+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.602+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.605+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.608+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.610+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.612+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.614+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.616+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.618+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.619+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.622+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.625+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.627+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.629+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.632+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.634+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.636+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.640+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.642+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.644+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.647+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.649+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.650+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.652+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.654+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.656+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.658+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.661+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.663+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.666+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.668+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.670+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.672+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.674+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.676+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.678+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.681+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.684+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.687+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.690+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.695+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.698+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.701+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.703+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.706+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.708+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.711+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.713+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.716+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.718+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.720+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.723+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.726+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.729+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.731+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.733+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.736+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.738+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.741+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.744+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.746+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.748+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.750+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.752+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.755+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.759+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.763+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.765+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.768+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.770+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.772+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.775+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.778+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.780+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.783+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.785+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.788+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.790+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.792+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.795+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.797+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.799+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T21:57:36.802+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-22T21:57:36.809+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch, task_id=print_date, execution_date=20231221T000000, start_date=20231222T215735, end_date=20231222T215736
+[2023-12-22T21:57:36.865+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-22T21:57:36.880+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T23:22:25.161+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T23:22:25.167+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T23:22:25.168+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T23:22:25.183+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): print_date> on 2023-12-21 00:00:00+00:00
+[2023-12-22T23:22:25.187+0000] {standard_task_runner.py:60} INFO - Started process 136 to run task
+[2023-12-22T23:22:25.189+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch', 'print_date', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/batchlayer.py', '--cfg-path', '/tmp/tmpy_5j076i']
+[2023-12-22T23:22:25.192+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask print_date
+[2023-12-22T23:22:25.231+0000] {task_command.py:423} INFO - Running <TaskInstance: batch.print_date scheduled__2023-12-21T00:00:00+00:00 [running]> on host f948fe9399e2
+[2023-12-22T23:22:25.429+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch' AIRFLOW_CTX_TASK_ID='print_date' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T23:22:25.432+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.439+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.441+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.443+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.444+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.446+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.447+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.449+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.450+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.452+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.453+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.455+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.457+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.458+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.460+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.461+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.463+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.464+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.466+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.468+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.469+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.471+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.472+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.474+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.475+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.476+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.478+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.479+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.480+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.482+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.483+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.485+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.486+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.488+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.489+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.490+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.492+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.493+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.494+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.495+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.496+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.497+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.499+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.501+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.502+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.503+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.505+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.506+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.507+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.509+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.510+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.511+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.512+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.514+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.516+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.518+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.519+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.520+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.522+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.523+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.525+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.526+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.528+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.530+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.531+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.533+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.534+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.536+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.537+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.539+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.540+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.542+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.543+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.545+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.548+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.550+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.551+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.552+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.554+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.555+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.556+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.557+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.559+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.560+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.563+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.565+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.566+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.568+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.569+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.571+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.572+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.573+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.575+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.576+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.577+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.579+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.580+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.581+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.583+0000] {logging_mixin.py:188} INFO - hamza
+[2023-12-22T23:22:26.585+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-22T23:22:26.594+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch, task_id=print_date, execution_date=20231221T000000, start_date=20231222T232225, end_date=20231222T232226
+[2023-12-22T23:22:26.648+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-22T23:22:26.666+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

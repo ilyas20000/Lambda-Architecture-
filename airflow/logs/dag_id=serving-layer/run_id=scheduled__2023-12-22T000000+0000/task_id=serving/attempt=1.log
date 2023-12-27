@@ -1,0 +1,75 @@
+[2023-12-23T11:13:41.836+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T11:13:41.841+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T11:13:41.842+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T11:13:41.853+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): serving> on 2023-12-22 00:00:00+00:00
+[2023-12-23T11:13:41.857+0000] {standard_task_runner.py:60} INFO - Started process 191 to run task
+[2023-12-23T11:13:41.858+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'serving-layer', 'serving', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/servingLayer.py', '--cfg-path', '/tmp/tmpvylatf8k']
+[2023-12-23T11:13:41.860+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask serving
+[2023-12-23T11:13:41.886+0000] {task_command.py:423} INFO - Running <TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T11:13:42.026+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='serving-layer' AIRFLOW_CTX_TASK_ID='serving' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T11:13:50.030+0000] {logging_mixin.py:188} INFO - Error: could not translate host name "postgres" to address: Temporary failure in name resolution
+[2023-12-23T11:13:50.031+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/servingLayer.py", line 79, in process_parquet_files
+    if cursor:
+UnboundLocalError: local variable 'cursor' referenced before assignment
+[2023-12-23T11:13:50.037+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=serving-layer, task_id=serving, execution_date=20231222T000000, start_date=20231223T111341, end_date=20231223T111350
+[2023-12-23T11:13:50.046+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 6 for task serving (local variable 'cursor' referenced before assignment; 191)
+[2023-12-23T11:13:50.084+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T11:13:50.093+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-23T19:22:19.925+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:22:19.932+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:22:19.932+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:22:19.943+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): serving> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:22:19.948+0000] {standard_task_runner.py:60} INFO - Started process 191 to run task
+[2023-12-23T19:22:19.950+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'serving-layer', 'serving', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/servingLayer.py', '--cfg-path', '/tmp/tmp8_kceypb']
+[2023-12-23T19:22:19.952+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask serving
+[2023-12-23T19:22:19.984+0000] {task_command.py:423} INFO - Running <TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [running]> on host 96b261be22d1
+[2023-12-23T19:22:20.148+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='serving-layer' AIRFLOW_CTX_TASK_ID='serving' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:22:28.153+0000] {logging_mixin.py:188} INFO - Error: could not translate host name "postgres" to address: Temporary failure in name resolution
+[2023-12-23T19:22:28.154+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/servingLayer.py", line 79, in process_parquet_files
+    if cursor:
+UnboundLocalError: local variable 'cursor' referenced before assignment
+[2023-12-23T19:22:28.169+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=serving-layer, task_id=serving, execution_date=20231222T000000, start_date=20231223T192219, end_date=20231223T192228
+[2023-12-23T19:22:28.183+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 6 for task serving (local variable 'cursor' referenced before assignment; 191)
+[2023-12-23T19:22:28.224+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T19:22:28.236+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-23T19:44:25.074+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:44:25.084+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:44:25.084+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:44:25.105+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): serving> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:44:25.111+0000] {standard_task_runner.py:60} INFO - Started process 191 to run task
+[2023-12-23T19:44:25.113+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'serving-layer', 'serving', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/servingLayer.py', '--cfg-path', '/tmp/tmpqj88m_43']
+[2023-12-23T19:44:25.115+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask serving
+[2023-12-23T19:44:25.143+0000] {task_command.py:423} INFO - Running <TaskInstance: serving-layer.serving scheduled__2023-12-22T00:00:00+00:00 [running]> on host ffa69df0a26f
+[2023-12-23T19:44:25.479+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='serving-layer' AIRFLOW_CTX_TASK_ID='serving' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:44:33.484+0000] {logging_mixin.py:188} INFO - Error: could not translate host name "postgres" to address: Temporary failure in name resolution
+[2023-12-23T19:44:33.484+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/servingLayer.py", line 79, in process_parquet_files
+    if cursor:
+UnboundLocalError: local variable 'cursor' referenced before assignment
+[2023-12-23T19:44:33.491+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=serving-layer, task_id=serving, execution_date=20231222T000000, start_date=20231223T194425, end_date=20231223T194433
+[2023-12-23T19:44:33.500+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 6 for task serving (local variable 'cursor' referenced before assignment; 191)
+[2023-12-23T19:44:33.532+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T19:44:33.541+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

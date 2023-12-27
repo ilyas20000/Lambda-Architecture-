@@ -1,0 +1,25 @@
+[2023-12-22T20:03:11.214+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement manual__2023-12-22T19:58:05.641906+00:00 [queued]>
+[2023-12-22T20:03:11.277+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement manual__2023-12-22T19:58:05.641906+00:00 [queued]>
+[2023-12-22T20:03:11.278+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T20:03:11.288+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-22 19:58:05.641906+00:00
+[2023-12-22T20:03:11.292+0000] {standard_task_runner.py:60} INFO - Started process 841 to run task
+[2023-12-22T20:03:11.294+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'manual__2023-12-22T19:58:05.641906+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp01bi25gy']
+[2023-12-22T20:03:11.296+0000] {standard_task_runner.py:88} INFO - Job 18: Subtask income_statement
+[2023-12-22T20:03:11.323+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement manual__2023-12-22T19:58:05.641906+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T20:03:11.359+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T19:58:05.641906+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T19:58:05.641906+00:00'
+[2023-12-22T20:03:11.364+0000] {base.py:83} INFO - Using connection ID 'spark-conn' for task execution.
+[2023-12-22T20:03:11.365+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 159, in execute
+    self._hook = self._get_hook()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 168, in _get_hook
+    return SparkSubmitHook(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 159, in __init__
+    self._is_yarn = "yarn" in self._connection["master"]
+TypeError: argument of type 'NoneType' is not iterable
+[2023-12-22T20:03:11.368+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231222T195805, start_date=20231222T200311, end_date=20231222T200311
+[2023-12-22T20:03:11.376+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 18 for task income_statement (argument of type 'NoneType' is not iterable; 841)
+[2023-12-22T20:03:11.386+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T20:03:11.395+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

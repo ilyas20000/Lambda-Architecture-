@@ -1,0 +1,48 @@
+[2023-12-23T13:01:49.062+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:56:56.500259+00:00 [queued]>
+[2023-12-23T13:01:49.068+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:56:56.500259+00:00 [queued]>
+[2023-12-23T13:01:49.069+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T13:01:49.085+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-23 12:56:56.500259+00:00
+[2023-12-23T13:01:49.089+0000] {standard_task_runner.py:60} INFO - Started process 1689 to run task
+[2023-12-23T13:01:49.091+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'manual__2023-12-23T12:56:56.500259+00:00', '--job-id', '25', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpqo63kje0']
+[2023-12-23T13:01:49.094+0000] {standard_task_runner.py:88} INFO - Job 25: Subtask batch_0
+[2023-12-23T13:01:49.120+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:56:56.500259+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T13:01:49.168+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T12:56:56.500259+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T12:56:56.500259+00:00'
+[2023-12-23T13:01:49.216+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T13:01:49.256+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T13:01:51.055+0000] {logging_mixin.py:188} INFO - Datetime column not found in the DataFrame.
+[2023-12-23T13:01:51.122+0000] {logging_mixin.py:188} INFO - Initial Result:
+[2023-12-23T13:01:51.131+0000] {logging_mixin.py:188} INFO -          date  hour           s         sum_v
+0  2023-12-17    21     BINANCE  1.462034e+02
+1  2023-12-20    19        AAPL  1.023518e+06
+2  2023-12-20    19        AMZN  1.493448e+06
+3  2023-12-20    19  IC MARKETS  0.000000e+00
+4  2023-12-21    21        AAPL  2.380000e+02
+5  2023-12-21    21        AMZN  1.700000e+01
+6  2023-12-21    21     BINANCE  4.604125e+02
+7  2023-12-22    15        AAPL  4.080000e+03
+8  2023-12-22    15        AMZN  1.485000e+03
+9  2023-12-22    15     BINANCE  8.235000e-02
+10 2023-12-22    15        MSFT  1.845000e+03
+11 2023-12-22    20        AAPL  6.343500e+04
+12 2023-12-22    20        AMZN  6.214500e+04
+13 2023-12-22    20     BINANCE  1.285455e+01
+14 2023-12-22    20        MSFT  3.625500e+04
+15 2023-12-22    21        AAPL  3.832600e+04
+16 2023-12-22    21        AMZN  5.840000e+02
+17 2023-12-22    21     BINANCE  1.560572e+03
+18 2023-12-22    23        AAPL  1.526000e+03
+19 2023-12-22    23        AMZN  9.500000e+01
+20 2023-12-22    23     BINANCE  2.199748e+02
+21 2023-12-22    23        MSFT  1.600000e+02
+22 2023-12-23    11     BINANCE  1.482575e+02
+[2023-12-23T13:01:51.137+0000] {logging_mixin.py:188} INFO - Transformed Result:
+[2023-12-23T13:01:51.138+0000] {logging_mixin.py:188} INFO - Empty DataFrame
+Columns: []
+Index: []
+[2023-12-23T13:01:51.144+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T13:01:51.149+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231223T125656, start_date=20231223T130149, end_date=20231223T130151
+[2023-12-23T13:01:51.192+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T13:01:51.200+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

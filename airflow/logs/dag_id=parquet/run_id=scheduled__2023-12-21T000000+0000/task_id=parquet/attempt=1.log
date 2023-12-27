@@ -1,0 +1,65 @@
+[2023-12-22T19:30:31.188+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:30:31.194+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:30:31.195+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T19:30:31.215+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): parquet> on 2023-12-21 00:00:00+00:00
+[2023-12-22T19:30:31.221+0000] {standard_task_runner.py:60} INFO - Started process 160 to run task
+[2023-12-22T19:30:31.231+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'parquet', 'parquet', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/parquet.py', '--cfg-path', '/tmp/tmp7zc7siir']
+[2023-12-22T19:30:31.238+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask parquet
+[2023-12-22T19:30:31.304+0000] {task_command.py:423} INFO - Running <TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T19:30:31.429+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='parquet' AIRFLOW_CTX_TASK_ID='parquet' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T19:30:31.435+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/parquet.py", line 14, in parquet
+    with open('/tmp/batchViews/df.parquet', 'x'):
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/batchViews/df.parquet'
+[2023-12-22T19:30:31.445+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=parquet, task_id=parquet, execution_date=20231221T000000, start_date=20231222T193031, end_date=20231222T193031
+[2023-12-22T19:30:31.464+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 5 for task parquet ([Errno 2] No such file or directory: '/tmp/batchViews/df.parquet'; 160)
+[2023-12-22T19:30:31.485+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T19:30:31.505+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T21:57:42.461+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T21:57:42.469+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T21:57:42.470+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T21:57:42.488+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): parquet> on 2023-12-21 00:00:00+00:00
+[2023-12-22T21:57:42.494+0000] {standard_task_runner.py:60} INFO - Started process 159 to run task
+[2023-12-22T21:57:42.499+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'parquet', 'parquet', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/parquet.py', '--cfg-path', '/tmp/tmpighzs97l']
+[2023-12-22T21:57:42.502+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask parquet
+[2023-12-22T21:57:42.550+0000] {task_command.py:423} INFO - Running <TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [running]> on host f9bc372cbc19
+[2023-12-22T21:57:42.636+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='parquet' AIRFLOW_CTX_TASK_ID='parquet' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T21:57:42.638+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/parquet.py", line 14, in parquet
+    with open('/tmp/batchViews/df.parquet', 'x'):
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/batchViews/df.parquet'
+[2023-12-22T21:57:42.650+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=parquet, task_id=parquet, execution_date=20231221T000000, start_date=20231222T215742, end_date=20231222T215742
+[2023-12-22T21:57:42.667+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 5 for task parquet ([Errno 2] No such file or directory: '/tmp/batchViews/df.parquet'; 159)
+[2023-12-22T21:57:42.713+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T21:57:42.726+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T23:22:30.614+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T23:22:30.619+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T23:22:30.620+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T23:22:30.660+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): parquet> on 2023-12-21 00:00:00+00:00
+[2023-12-22T23:22:30.665+0000] {standard_task_runner.py:60} INFO - Started process 161 to run task
+[2023-12-22T23:22:30.667+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'parquet', 'parquet', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/parquet.py', '--cfg-path', '/tmp/tmp51sk4kct']
+[2023-12-22T23:22:30.669+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask parquet
+[2023-12-22T23:22:30.706+0000] {task_command.py:423} INFO - Running <TaskInstance: parquet.parquet scheduled__2023-12-21T00:00:00+00:00 [running]> on host f948fe9399e2
+[2023-12-22T23:22:30.757+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='parquet' AIRFLOW_CTX_TASK_ID='parquet' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T23:22:30.761+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/df.parquet' created successfully.
+[2023-12-22T23:22:30.816+0000] {logging_mixin.py:188} INFO -    column1 column2
+0        1  value1
+1        2  value2
+[2023-12-22T23:22:30.817+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-22T23:22:30.821+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=parquet, task_id=parquet, execution_date=20231221T000000, start_date=20231222T232230, end_date=20231222T232230
+[2023-12-22T23:22:30.840+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-22T23:22:30.849+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

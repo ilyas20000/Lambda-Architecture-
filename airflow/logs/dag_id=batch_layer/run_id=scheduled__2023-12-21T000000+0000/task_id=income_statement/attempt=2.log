@@ -1,0 +1,130 @@
+[2023-12-22T15:39:14.990+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T15:39:15.050+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T15:39:15.050+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T15:39:15.061+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-21 00:00:00+00:00
+[2023-12-22T15:39:15.065+0000] {standard_task_runner.py:60} INFO - Started process 522 to run task
+[2023-12-22T15:39:15.067+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpiau1bsag']
+[2023-12-22T15:39:15.068+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask income_statement
+[2023-12-22T15:39:15.117+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [running]> on host 12ffadfc8407
+[2023-12-22T15:39:15.179+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T15:39:15.185+0000] {spark_submit.py:223} INFO - Could not load connection string spark-conn, defaulting to yarn
+[2023-12-22T15:39:15.187+0000] {spark_submit.py:351} INFO - Spark-Submit cmd: spark-submit --master yarn --name arrow-spark ./batch_proc_0.py
+[2023-12-22T15:39:16.311+0000] {spark_submit.py:521} INFO - Exception in thread "main" org.apache.spark.SparkException: When running with master 'yarn' either HADOOP_CONF_DIR or YARN_CONF_DIR must be set in the environment.
+[2023-12-22T15:39:16.311+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.error(SparkSubmitArguments.scala:650)
+[2023-12-22T15:39:16.312+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateSubmitArguments(SparkSubmitArguments.scala:281)
+[2023-12-22T15:39:16.312+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateArguments(SparkSubmitArguments.scala:237)
+[2023-12-22T15:39:16.313+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.<init>(SparkSubmitArguments.scala:122)
+[2023-12-22T15:39:16.313+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2$$anon$3.<init>(SparkSubmit.scala:1103)
+[2023-12-22T15:39:16.314+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.parseArguments(SparkSubmit.scala:1103)
+[2023-12-22T15:39:16.314+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+[2023-12-22T15:39:16.314+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+[2023-12-22T15:39:16.315+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+[2023-12-22T15:39:16.315+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+[2023-12-22T15:39:16.333+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 160, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 452, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --name arrow-spark ./batch_proc_0.py. Error code is: 1.
+[2023-12-22T15:39:16.336+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231221T000000, start_date=20231222T153914, end_date=20231222T153916
+[2023-12-22T15:39:16.345+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 8 for task income_statement (Cannot execute: spark-submit --master yarn --name arrow-spark ./batch_proc_0.py. Error code is: 1.; 522)
+[2023-12-22T15:39:16.365+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T15:39:16.373+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T16:57:20.155+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T16:57:20.218+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T16:57:20.219+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T16:57:20.230+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-21 00:00:00+00:00
+[2023-12-22T16:57:20.233+0000] {standard_task_runner.py:60} INFO - Started process 335 to run task
+[2023-12-22T16:57:20.241+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp_ngdrjrj']
+[2023-12-22T16:57:20.244+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask income_statement
+[2023-12-22T16:57:20.290+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [running]> on host acbfdef87f0c
+[2023-12-22T16:57:20.339+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T16:57:20.344+0000] {spark_submit.py:223} INFO - Could not load connection string spark-conn, defaulting to yarn
+[2023-12-22T16:57:20.345+0000] {spark_submit.py:351} INFO - Spark-Submit cmd: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py
+[2023-12-22T16:57:21.676+0000] {spark_submit.py:521} INFO - Exception in thread "main" org.apache.spark.SparkException: When running with master 'yarn' either HADOOP_CONF_DIR or YARN_CONF_DIR must be set in the environment.
+[2023-12-22T16:57:21.677+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.error(SparkSubmitArguments.scala:650)
+[2023-12-22T16:57:21.678+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateSubmitArguments(SparkSubmitArguments.scala:281)
+[2023-12-22T16:57:21.678+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateArguments(SparkSubmitArguments.scala:237)
+[2023-12-22T16:57:21.678+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.<init>(SparkSubmitArguments.scala:122)
+[2023-12-22T16:57:21.679+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2$$anon$3.<init>(SparkSubmit.scala:1103)
+[2023-12-22T16:57:21.679+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.parseArguments(SparkSubmit.scala:1103)
+[2023-12-22T16:57:21.679+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+[2023-12-22T16:57:21.679+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+[2023-12-22T16:57:21.680+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+[2023-12-22T16:57:21.680+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+[2023-12-22T16:57:21.702+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 160, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 452, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 1.
+[2023-12-22T16:57:21.707+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231221T000000, start_date=20231222T165720, end_date=20231222T165721
+[2023-12-22T16:57:21.716+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 5 for task income_statement (Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 1.; 335)
+[2023-12-22T16:57:21.735+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T16:57:21.749+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T17:33:25.862+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T17:33:25.924+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T17:33:25.925+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T17:33:25.936+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-21 00:00:00+00:00
+[2023-12-22T17:33:25.940+0000] {standard_task_runner.py:60} INFO - Started process 338 to run task
+[2023-12-22T17:33:25.942+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmph56992vk']
+[2023-12-22T17:33:25.944+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask income_statement
+[2023-12-22T17:33:25.970+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [running]> on host 2b4747b40708
+[2023-12-22T17:33:26.004+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T17:33:26.008+0000] {spark_submit.py:223} INFO - Could not load connection string spark-conn, defaulting to yarn
+[2023-12-22T17:33:26.009+0000] {spark_submit.py:351} INFO - Spark-Submit cmd: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py
+[2023-12-22T17:33:26.999+0000] {spark_submit.py:521} INFO - Exception in thread "main" org.apache.spark.SparkException: When running with master 'yarn' either HADOOP_CONF_DIR or YARN_CONF_DIR must be set in the environment.
+[2023-12-22T17:33:26.999+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.error(SparkSubmitArguments.scala:650)
+[2023-12-22T17:33:27.000+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateSubmitArguments(SparkSubmitArguments.scala:281)
+[2023-12-22T17:33:27.000+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.validateArguments(SparkSubmitArguments.scala:237)
+[2023-12-22T17:33:27.001+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmitArguments.<init>(SparkSubmitArguments.scala:122)
+[2023-12-22T17:33:27.001+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2$$anon$3.<init>(SparkSubmit.scala:1103)
+[2023-12-22T17:33:27.001+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.parseArguments(SparkSubmit.scala:1103)
+[2023-12-22T17:33:27.002+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+[2023-12-22T17:33:27.002+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+[2023-12-22T17:33:27.002+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+[2023-12-22T17:33:27.003+0000] {spark_submit.py:521} INFO - at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+[2023-12-22T17:33:27.020+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 160, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 452, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 1.
+[2023-12-22T17:33:27.023+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231221T000000, start_date=20231222T173325, end_date=20231222T173327
+[2023-12-22T17:33:27.033+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 5 for task income_statement (Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 1.; 338)
+[2023-12-22T17:33:27.040+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T17:33:27.047+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-22T19:35:21.989+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:35:22.053+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [queued]>
+[2023-12-22T19:35:22.054+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T19:35:22.066+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-21 00:00:00+00:00
+[2023-12-22T19:35:22.072+0000] {standard_task_runner.py:60} INFO - Started process 288 to run task
+[2023-12-22T19:35:22.078+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'scheduled__2023-12-21T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp76x9w4v7']
+[2023-12-22T19:35:22.084+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask income_statement
+[2023-12-22T19:35:22.140+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement scheduled__2023-12-21T00:00:00+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T19:35:22.219+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-21T00:00:00+00:00'
+[2023-12-22T19:35:22.224+0000] {spark_submit.py:223} INFO - Could not load connection string spark-conn, defaulting to yarn
+[2023-12-22T19:35:22.225+0000] {spark_submit.py:351} INFO - Spark-Submit cmd: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py
+[2023-12-22T19:35:22.233+0000] {spark_submit.py:521} INFO - /home/airflow/.local/bin/spark-submit: line 27: /opt/spark/bin/spark-class: No such file or directory
+[2023-12-22T19:35:22.240+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 160, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 452, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 127.
+[2023-12-22T19:35:22.244+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231221T000000, start_date=20231222T193521, end_date=20231222T193522
+[2023-12-22T19:35:22.256+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 8 for task income_statement (Cannot execute: spark-submit --master yarn --name arrow-spark /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 127.; 288)
+[2023-12-22T19:35:22.294+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T19:35:22.303+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

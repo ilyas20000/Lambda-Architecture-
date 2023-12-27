@@ -143,7 +143,7 @@ def kafka_consumer_worker():
     messages_consumed = 0
 
 
-    while messages_consumed < 2:
+    while messages_consumed < 5000:
         msg = consumer.poll(1000)
 
         if msg is None:

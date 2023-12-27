@@ -1,0 +1,181 @@
+[2023-12-26T16:59:50.771+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-26T16:59:47.548435+00:00 [queued]>
+[2023-12-26T16:59:50.775+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-26T16:59:47.548435+00:00 [queued]>
+[2023-12-26T16:59:50.776+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T16:59:50.786+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-26 16:59:47.548435+00:00
+[2023-12-26T16:59:50.790+0000] {standard_task_runner.py:60} INFO - Started process 455 to run task
+[2023-12-26T16:59:50.793+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'manual__2023-12-26T16:59:47.548435+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpjpw8a3ma']
+[2023-12-26T16:59:50.795+0000] {standard_task_runner.py:88} INFO - Job 11: Subtask consume_data
+[2023-12-26T16:59:50.824+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data manual__2023-12-26T16:59:47.548435+00:00 [running]> on host ba237c0dfd1a
+[2023-12-26T16:59:50.865+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-26T16:59:47.548435+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-26T16:59:47.548435+00:00'
+[2023-12-26T16:59:50.915+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T16:59:50.955+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS finnhub_table
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-26T16:59:51.010+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T16:59:51.071+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS temp_avro_data
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-26T16:59:51.085+0000] {logging_mixin.py:188} INFO - [[{'c': None, 'p': 2224.25, 's': 'BINANCE:ETHUSDT', 't': 1703608851513, 'v': 0.0251}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608851532, 'v': 0.00052}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608851840, 'v': 1}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608851670, 'v': 0.4147}, {'c': ['1', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703608851881, 'v': 33}, {'c': ['1', '12'], 'p': 153.415, 's': 'AMZN', 't': 1703608851976, 'v': 25}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608851899, 'v': 0.00028}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608851943, 'v': 0.00752}, {'c': None, 'p': 2224.25, 's': 'BINANCE:ETHUSDT', 't': 1703608852091, 'v': 0.1129}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608852253, 'v': 100}], [{'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608852253, 'v': 100}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608852254, 'v': 100}, {'c': ['1'], 'p': 193.0751, 's': 'AAPL', 't': 1703608852296, 'v': 300}, {'c': ['1', '12'], 'p': 153.4188, 's': 'AMZN', 't': 1703608852343, 'v': 1}, {'c': ['1', '12'], 'p': 153.4158, 's': 'AMZN', 't': 1703608852426, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608852336, 'v': 0.00251}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608852387, 'v': 0.0363}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608852402, 'v': 0.2811}, {'c': ['1', '12'], 'p': 193.075, 's': 'AAPL', 't': 1703608852555, 'v': 1}, {'c': ['1'], 'p': 193.0799, 's': 'AAPL', 't': 1703608852560, 'v': 100}], [{'c': None, 'p': 2224.25, 's': 'BINANCE:ETHUSDT', 't': 1703608852462, 'v': 0.0293}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608852503, 'v': 0.2515}], [{'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608852567, 'v': 0.00753}, {'c': ['1', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608852805, 'v': 1}, {'c': ['1', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608852805, 'v': 1}, {'c': ['1', '8', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608852806, 'v': 1}, {'c': ['1', '8', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608852806, 'v': 2}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852819, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608852695, 'v': 0.00097}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852855, 'v': 1}, {'c': ['1', '12'], 'p': 193.075, 's': 'AAPL', 't': 1703608852872, 'v': 8}, {'c': ['1', '12'], 'p': 193.07, 's': 'AAPL', 't': 1703608852873, 'v': 8}], [{'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 100}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 100}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 100}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 200}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 100}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 200}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852874, 'v': 1}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 25}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852874, 'v': 5}], [{'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852874, 'v': 95}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852874, 'v': 3}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852874, 'v': 40}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852875, 'v': 99}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852875, 'v': 1}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852875, 'v': 40}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608852875, 'v': 4}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 11}, {'c': ['1', '8'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 300}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 2}], [{'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 62}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 1}, {'c': ['1'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 100}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 20}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 25}, {'c': ['1', '8', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852875, 'v': 38}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852876, 'v': 82}, {'c': ['1'], 'p': 193.08, 's': 'AAPL', 't': 1703608852876, 'v': 100}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852876, 'v': 13}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852876, 'v': 14}], [{'c': ['1'], 'p': 193.08, 's': 'AAPL', 't': 1703608852876, 'v': 100}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608852877, 'v': 50}, {'c': ['1', '8', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608852876, 'v': 4}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608852778, 'v': 0.0072}, {'c': ['1', '12'], 'p': 193.09, 's': 'AAPL', 't': 1703608852973, 'v': 11}, {'c': ['1'], 'p': 153.4183, 's': 'AMZN', 't': 1703608852999, 'v': 246}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608853005, 'v': 100}, {'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608853117, 'v': 1}, {'c': ['1', '12'], 'p': 374.5299, 's': 'MSFT', 't': 1703608853190, 'v': 1}, {'c': ['1', '12'], 'p': 374.5003, 's': 'MSFT', 't': 1703608853271, 'v': 24}], [{'c': ['1', '12'], 'p': 193.0844, 's': 'AAPL', 't': 1703608853295, 'v': 2}, {'c': ['1', '12'], 'p': 193.083, 's': 'AAPL', 't': 1703608853300, 'v': 6}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608853434, 'v': 100}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608853295, 'v': 0.022}, {'c': ['1', '12'], 'p': 153.4199, 's': 'AMZN', 't': 1703608853456, 'v': 50}, {'c': ['1', '12'], 'p': 153.415, 's': 'AMZN', 't': 1703608853505, 'v': 1}, {'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608853531, 'v': 50}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608853478, 'v': 0.00752}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853484, 'v': 0.00014}], [{'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853525, 'v': 0.00025}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853544, 'v': 0.25645}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853544, 'v': 0.24355}, {'c': ['1'], 'p': 193.08, 's': 'AAPL', 't': 1703608853833, 'v': 1000}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853707, 'v': 0.0004}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853781, 'v': 0.00075}, {'c': None, 'p': 2224.25, 's': 'BINANCE:ETHUSDT', 't': 1703608853830, 'v': 0.026}, {'c': None, 'p': 2224.25, 's': 'BINANCE:ETHUSDT', 't': 1703608853832, 'v': 0.0174}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608853848, 'v': 0.00123}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608853849, 'v': 0.0004}]]
+[2023-12-26T16:59:51.087+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2224.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703608851513,
+                                0.0251
+                            )
+                        
+[2023-12-26T16:59:53.223+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                42331.1,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703608851532,
+                                0.00052
+                            )
+                        
+[2023-12-26T16:59:55.337+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.5,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608851840,
+                                1
+                            )
+                        
+[2023-12-26T16:59:57.865+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2224.24,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703608851670,
+                                0.4147
+                            )
+                        
+[2023-12-26T17:00:00.469+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.42,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608851881,
+                                33
+                            )
+                        
+[2023-12-26T17:00:02.994+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608851976,
+                                25
+                            )
+                        
+[2023-12-26T17:00:05.174+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                42331.1,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703608851899,
+                                0.00028
+                            )
+                        
+[2023-12-26T17:00:07.310+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                42331.09,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703608851943,
+                                0.00752
+                            )
+                        
+[2023-12-26T17:00:09.834+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2224.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703608852091,
+                                0.1129
+                            )
+                        
+[2023-12-26T17:00:12.336+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608852253,
+                                100
+                            )
+                        
+[2023-12-26T17:00:14.478+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608852253,
+                                100
+                            )
+                        
+[2023-12-26T17:00:15.986+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to success. Terminating instance.
+[2023-12-26T17:00:15.988+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 455. PIDs of all processes in the group: [455]
+[2023-12-26T17:00:15.988+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 455
+[2023-12-26T17:00:15.988+0000] {taskinstance.py:2451} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-12-26T17:00:15.989+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: Task received SIGTERM signal
+[2023-12-26T17:00:15.990+0000] {logging_mixin.py:188} INFO - [[{'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854438, 'v': 0.0002}, {'c': ['1', '12'], 'p': 193.09, 's': 'AAPL', 't': 1703608854081, 'v': 1}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608853930, 'v': 0.00172}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608853968, 'v': 0.00123}, {'c': ['1', '12'], 'p': 193.0876, 's': 'AAPL', 't': 1703608854145, 'v': 3}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608853994, 'v': 0.00123}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854009, 'v': 0.00025}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854023, 'v': 0.00145}, {'c': ['1', '12'], 'p': 153.4115, 's': 'AMZN', 't': 1703608854198, 'v': 1}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854045, 'v': 0.0013}], [{'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608854203, 'v': 50}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703608854223, 'v': 500}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854070, 'v': 0.00123}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854095, 'v': 0.01817}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854156, 'v': 0.00093}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854215, 'v': 0.00021}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854223, 'v': 0.0002}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854230, 'v': 0.00169}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608854398, 'v': 1}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608854245, 'v': 0.00019}], [{'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854292, 'v': 0.00024}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854306, 'v': 0.00765}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854364, 'v': 0.0024}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854378, 'v': 0.00118}, {'c': ['1'], 'p': 374.48, 's': 'MSFT', 't': 1703608854525, 'v': 100}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854508, 'v': 0.00753}], [{'c': ['1', '12'], 'p': 153.4126, 's': 'AMZN', 't': 1703608854688, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854647, 'v': 0.00026}, {'c': ['1', '12'], 'p': 153.4167, 's': 'AMZN', 't': 1703608854826, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608854741, 'v': 0.00049}, {'c': ['1', '12'], 'p': 374.495, 's': 'MSFT', 't': 1703608854911, 'v': 1}, {'c': ['1', '12'], 'p': 193.08, 's': 'AAPL', 't': 1703608854919, 'v': 2}, {'c': ['1', '12'], 'p': 374.5063, 's': 'MSFT', 't': 1703608854962, 'v': 15}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608854976, 'v': 1}, {'c': ['1', '12'], 'p': 153.4113, 's': 'AMZN', 't': 1703608855106, 'v': 1}, {'c': ['1', '12'], 'p': 153.4125, 's': 'AMZN', 't': 1703608855111, 'v': 1}], [{'c': ['1', '8', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608855179, 'v': 18}, {'c': ['1', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608855179, 'v': 85}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608855046, 'v': 0.7513}, {'c': None, 'p': 2224.24, 's': 'BINANCE:ETHUSDT', 't': 1703608855046, 'v': 0.0547}, {'c': None, 'p': 2224.2, 's': 'BINANCE:ETHUSDT', 't': 1703608855049, 'v': 0.1272}, {'c': None, 'p': 2224.14, 's': 'BINANCE:ETHUSDT', 't': 1703608855053, 'v': 0.0043}, {'c': ['1'], 'p': 374.5, 's': 'MSFT', 't': 1703608855245, 'v': 100}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 3.75}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 1.4}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 1.25}], [{'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 2.2}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 2}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 1.2}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 1}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 1.0332}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 26.6308}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 3.5511}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 8}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 4}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 4.4925}], [{'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 2.8747}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 6.4557}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855194, 'v': 2.8316}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 1}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 3}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 1}], [{'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 50}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 10}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 2}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 1}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 9}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}], [{'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 100}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855358, 'v': 16}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608855359, 'v': 1}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855361, 'v': 200}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855361, 'v': 300}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608855225, 'v': 0.0037}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608855225, 'v': 0.1272}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855318, 'v': 0.4585}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855318, 'v': 0.192}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855318, 'v': 1.148}], [{'c': ['1', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608855530, 'v': 10}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608855473, 'v': 0.00753}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608855410, 'v': 0.00171}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608855431, 'v': 0.00423}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608855431, 'v': 0.00381}]]
+[2023-12-26T17:00:15.990+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                42331.09,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703608854438,
+                                0.0002
+                            )
+                        
+[2023-12-26T17:00:19.122+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: 'utf-8' codec can't decode byte 0xe3 in position 0: invalid continuation byte
+[2023-12-26T17:00:19.123+0000] {logging_mixin.py:188} INFO - [[{'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855689, 'v': 100}, {'c': ['1', '12'], 'p': 374.4959, 's': 'MSFT', 't': 1703608855691, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608855537, 'v': 0.00823}, {'c': ['1', '12'], 'p': 153.4032, 's': 'AMZN', 't': 1703608855717, 'v': 50}, {'c': ['1', '12'], 'p': 153.4, 's': 'AMZN', 't': 1703608855790, 'v': 65}, {'c': ['1', '32', '12'], 'p': 153.4114, 's': 'AMZN', 't': 1703608855791, 'v': 50}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855792, 'v': 100}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855792, 'v': 100}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855792, 'v': 100}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608855799, 'v': 100}], [{'c': ['1'], 'p': 193.0802, 's': 'AAPL', 't': 1703608855888, 'v': 300}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608855734, 'v': 0.5476}, {'c': ['1', '12'], 'p': 193.0888, 's': 'AAPL', 't': 1703608855892, 'v': 1}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608855772, 'v': 0.1014}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608855775, 'v': 0.064}, {'c': ['1', '8', '12'], 'p': 374.5, 's': 'MSFT', 't': 1703608855977, 'v': 1}, {'c': ['1', '12'], 'p': 153.405, 's': 'AMZN', 't': 1703608856622, 'v': 25}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608855969, 'v': 0.00238}, {'c': ['1', '12'], 'p': 193.0897, 's': 'AAPL', 't': 1703608856139, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608856016, 'v': 0.00026}], [{'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608856136, 'v': 0.00021}, {'c': ['1', '12'], 'p': 193.0897, 's': 'AAPL', 't': 1703608856396, 'v': 1}, {'c': ['1', '12'], 'p': 193.0888, 's': 'AAPL', 't': 1703608856398, 'v': 1}, {'c': ['1', '12'], 'p': 193.09, 's': 'AAPL', 't': 1703608856442, 'v': 27}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608856303, 'v': 0.0431}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608856306, 'v': 0.078}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608856306, 'v': 1.922}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608856375, 'v': 0.00416}, {'c': ['1', '12'], 'p': 374.49, 's': 'MSFT', 't': 1703608856540, 'v': 1}, {'c': ['1', '12'], 'p': 193.0801, 's': 'AAPL', 't': 1703608856539, 'v': 45}], [{'c': ['1', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608856541, 'v': 8}, {'c': ['1', '12'], 'p': 193.0878, 's': 'AAPL', 't': 1703608856575, 'v': 1}, {'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608856592, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608856563, 'v': 0.00753}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608856601, 'v': 0.0112}], [{'c': ['1', '12'], 'p': 193.083, 's': 'AAPL', 't': 1703608856827, 'v': 25}, {'c': ['1', '12'], 'p': 153.402, 's': 'AMZN', 't': 1703608856885, 'v': 62}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608856821, 'v': 0.05014}, {'c': ['1', '12'], 'p': 193.0899, 's': 'AAPL', 't': 1703608856996, 'v': 1}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608856874, 'v': 0.00072}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608857489, 'v': 0.00752}, {'c': ['1', '12'], 'p': 193.09, 's': 'AAPL', 't': 1703608857122, 'v': 20}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608857181, 'v': 100}, {'c': ['1', '12'], 'p': 153.405, 's': 'AMZN', 't': 1703608857191, 'v': 1}, {'c': ['1', '12'], 'p': 153.405, 's': 'AMZN', 't': 1703608857391, 'v': 5}], [{'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608857421, 'v': 1}, {'c': ['1', '12'], 'p': 193.0899, 's': 'AAPL', 't': 1703608857483, 'v': 50}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608857330, 'v': 0.00125}, {'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608857585, 'v': 4}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608857447, 'v': 0.00921}, {'c': ['1', '12'], 'p': 193.09, 's': 'AAPL', 't': 1703608857674, 'v': 8}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608857691, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608857539, 'v': 0.00314}, {'c': ['1', '12'], 'p': 153.405, 's': 'AMZN', 't': 1703608857736, 'v': 1}, {'c': ['1', '12'], 'p': 153.4021, 's': 'AMZN', 't': 1703608857744, 'v': 5}], [{'c': ['1', '12'], 'p': 374.5096, 's': 'MSFT', 't': 1703608857780, 'v': 20}, {'c': ['1', '12'], 'p': 153.4088, 's': 'AMZN', 't': 1703608857850, 'v': 1}, {'c': ['1', '12'], 'p': 374.53, 's': 'MSFT', 't': 1703608858049, 'v': 1}, {'c': ['1', '12'], 'p': 193.0878, 's': 'AAPL', 't': 1703608858048, 'v': 1}, {'c': ['1', '12'], 'p': 153.407, 's': 'AMZN', 't': 1703608858104, 'v': 25}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608858112, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858144, 'v': 0.00472}, {'c': ['1', '12'], 'p': 193.0899, 's': 'AAPL', 't': 1703608858389, 'v': 1}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858236, 'v': 0.00276}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608858339, 'v': 0.0059}], [{'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608858503, 'v': 13}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608858381, 'v': 0.0359}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608858383, 'v': 0.0089}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608858387, 'v': 0.0027}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608858392, 'v': 0.00165}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608858401, 'v': 0.00064}, {'c': ['1'], 'p': 153.4001, 's': 'AMZN', 't': 1703608858557, 'v': 250}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608858416, 'v': 0.01923}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858548, 'v': 0.00753}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858589, 'v': 0.00708}], [{'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858681, 'v': 0.00236}, {'c': None, 'p': 2224.06, 's': 'BINANCE:ETHUSDT', 't': 1703608858705, 'v': 0.4518}, {'c': ['1', '8', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 80}, {'c': ['1', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 20}, {'c': ['1', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 2}, {'c': ['1', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 22}, {'c': ['1', '8', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 12}, {'c': ['1', '8', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 22}, {'c': ['1', '12'], 'p': 374.51, 's': 'MSFT', 't': 1703608858877, 'v': 16}, {'c': ['1'], 'p': 153.405, 's': 'AMZN', 't': 1703608858928, 'v': 100}], [{'c': ['1', '12'], 'p': 153.405, 's': 'AMZN', 't': 1703608858952, 'v': 4}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608858817, 'v': 1.0824}, {'c': None, 'p': 42331.1, 's': 'BINANCE:BTCUSDT', 't': 1703608858864, 'v': 0.02361}, {'c': ['1', '12'], 'p': 193.085, 's': 'AAPL', 't': 1703608859046, 'v': 10}, {'c': None, 'p': 42331.09, 's': 'BINANCE:BTCUSDT', 't': 1703608858899, 'v': 0.00023}, {'c': ['1', '12'], 'p': 153.4085, 's': 'AMZN', 't': 1703608859145, 'v': 1}, {'c': None, 'p': 2224.05, 's': 'BINANCE:ETHUSDT', 't': 1703608858989, 'v': 0.3195}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608859189, 'v': 29}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608859189, 'v': 71}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703608859189, 'v': 47}]]
+[2023-12-26T17:00:19.123+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.405,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703608855689,
+                                100
+                            )
+                        
+[2023-12-26T17:01:16.026+0000] {process_utils.py:149} WARNING - process psutil.Process(pid=455, name='airflow task runner: batch_layer consume_data manual__2023-12-26T16:59:47.548435+00:00 11', status='sleeping', started='16:59:50') did not respond to SIGTERM. Trying SIGKILL
+[2023-12-26T17:01:16.027+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGKILL to group 455
+[2023-12-26T17:01:16.034+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=455, name='airflow task runner: batch_layer consume_data manual__2023-12-26T16:59:47.548435+00:00 11', status='terminated', exitcode=<Negsignal.SIGKILL: -9>, started='16:59:50') (455) terminated with exit code Negsignal.SIGKILL
+[2023-12-26T17:01:16.035+0000] {standard_task_runner.py:175} ERROR - Job 11 was killed before it finished (likely due to running out of memory)

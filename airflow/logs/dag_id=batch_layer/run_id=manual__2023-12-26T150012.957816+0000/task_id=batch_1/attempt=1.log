@@ -1,0 +1,43 @@
+[2023-12-26T15:07:07.529+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-26T15:00:12.957816+00:00 [queued]>
+[2023-12-26T15:07:07.535+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-26T15:00:12.957816+00:00 [queued]>
+[2023-12-26T15:07:07.535+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T15:07:07.547+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-26 15:00:12.957816+00:00
+[2023-12-26T15:07:07.552+0000] {standard_task_runner.py:60} INFO - Started process 1978 to run task
+[2023-12-26T15:07:07.554+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'manual__2023-12-26T15:00:12.957816+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp3f7qrqf9']
+[2023-12-26T15:07:07.556+0000] {standard_task_runner.py:88} INFO - Job 18: Subtask batch_1
+[2023-12-26T15:07:07.585+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 manual__2023-12-26T15:00:12.957816+00:00 [running]> on host 21f64a9239d6
+[2023-12-26T15:07:07.668+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-26T15:00:12.957816+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-26T15:00:12.957816+00:00'
+[2023-12-26T15:07:07.730+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T15:07:07.812+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T15:07:16.384+0000] {logging_mixin.py:188} INFO -               p crypto_pair                       t        v
+0      43694.01     BTCUSDT 2023-12-25 13:10:26.122  0.00095
+1      43694.00     BTCUSDT 2023-12-25 13:10:26.314  0.00919
+2      43693.84     BTCUSDT 2023-12-25 13:10:26.333  0.00229
+3      43693.63     BTCUSDT 2023-12-25 13:10:26.333  0.00814
+4      43693.35     BTCUSDT 2023-12-25 13:10:26.333  0.00229
+...         ...         ...                     ...      ...
+58414  43685.51     BTCUSDT 2023-12-25 13:10:27.614  0.00229
+58415  43685.26     BTCUSDT 2023-12-25 13:10:27.614  0.00062
+58416  43685.02     BTCUSDT 2023-12-25 13:10:27.614  0.00229
+58417  43685.00     BTCUSDT 2023-12-25 13:10:27.614  0.00062
+58418  43684.74     BTCUSDT 2023-12-25 13:10:27.614  0.00062
+
+[58419 rows x 4 columns]
+[2023-12-26T15:07:16.405+0000] {logging_mixin.py:188} INFO -                         p                             t         v
+crypto_pair                                                      
+BTCUSDT      43595.902016 2023-12-25 16:30:02.169570816  0.034215
+ETHUSDT       2281.342008 2023-12-25 16:43:05.589600256  0.620838
+None           300.627895 2023-12-26 12:45:19.004197376  8.671053
+[2023-12-26T15:07:16.407+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-26T15:07:16.448+0000] {logging_mixin.py:188} INFO -                         p                          t         v
+crypto_pair                                                   
+BTCUSDT      43595.902016 2023-12-25 16:30:02.169570  0.034215
+ETHUSDT       2281.342008 2023-12-25 16:43:05.589600  0.620838
+None           300.627895 2023-12-26 12:45:19.004197  8.671053
+[2023-12-26T15:07:16.457+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T15:07:16.462+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231226T150012, start_date=20231226T150707, end_date=20231226T150716
+[2023-12-26T15:07:16.512+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T15:07:16.520+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

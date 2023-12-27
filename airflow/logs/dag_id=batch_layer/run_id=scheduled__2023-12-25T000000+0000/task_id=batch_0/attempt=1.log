@@ -1,0 +1,231 @@
+[2023-12-26T00:06:17.427+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T00:06:17.432+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T00:06:17.432+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T00:06:17.444+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-25 00:00:00+00:00
+[2023-12-26T00:06:17.450+0000] {standard_task_runner.py:60} INFO - Started process 2919 to run task
+[2023-12-26T00:06:17.455+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-25T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpws9ompll']
+[2023-12-26T00:06:17.458+0000] {standard_task_runner.py:88} INFO - Job 15: Subtask batch_0
+[2023-12-26T00:06:17.483+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [running]> on host 5e983ae2bbe8
+[2023-12-26T00:06:17.535+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-25T00:00:00+00:00'
+[2023-12-26T00:06:17.591+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T00:06:17.628+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T00:06:19.808+0000] {logging_mixin.py:188} INFO -          date  hour        s       sum_v
+0  2023-12-25    13  BINANCE  1780.92731
+1  2023-12-25    14  BINANCE  5598.74250
+2  2023-12-25    18  BINANCE  3013.21489
+3  2023-12-25    20  BINANCE    30.43061
+[2023-12-26T00:06:19.814+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output.parquet' already exists.
+[2023-12-26T00:06:19.893+0000] {logging_mixin.py:188} INFO -          date  hour        s       sum_v
+0  2023-12-25    13  BINANCE  1780.92731
+1  2023-12-25    14  BINANCE  5598.74250
+2  2023-12-25    18  BINANCE  3013.21489
+3  2023-12-25    20  BINANCE    30.43061
+[2023-12-26T00:06:19.898+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T00:06:19.903+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231225T000000, start_date=20231226T000617, end_date=20231226T000619
+[2023-12-26T00:06:20.116+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T00:06:20.124+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-26T13:00:35.122+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T13:00:35.128+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T13:00:35.128+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T13:00:35.141+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-25 00:00:00+00:00
+[2023-12-26T13:00:35.146+0000] {standard_task_runner.py:60} INFO - Started process 308 to run task
+[2023-12-26T13:00:35.149+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-25T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp3rr8e4a5']
+[2023-12-26T13:00:35.151+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-26T13:00:35.177+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [running]> on host 21f64a9239d6
+[2023-12-26T13:00:35.221+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-25T00:00:00+00:00'
+[2023-12-26T13:00:35.273+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T13:00:35.317+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T13:00:38.344+0000] {logging_mixin.py:188} INFO -          date  hour        s       sum_v
+0  2023-12-25    13  BINANCE  1905.49293
+1  2023-12-25    14  BINANCE  6052.89436
+2  2023-12-25    18  BINANCE  3509.45107
+3  2023-12-25    20  BINANCE    69.39403
+4  2023-12-26    12     AAPL     7.00000
+5  2023-12-26    12  BINANCE    46.96301
+6  2023-12-26    12     MSFT   109.00000
+[2023-12-26T13:00:38.346+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output.parquet' already exists.
+[2023-12-26T13:00:38.455+0000] {logging_mixin.py:188} INFO -          date  hour        s       sum_v
+0  2023-12-25    13  BINANCE  1905.49293
+1  2023-12-25    14  BINANCE  6052.89436
+2  2023-12-25    18  BINANCE  3509.45107
+3  2023-12-25    20  BINANCE    69.39403
+4  2023-12-26    12     AAPL     7.00000
+5  2023-12-26    12  BINANCE    46.96301
+6  2023-12-26    12     MSFT   109.00000
+[2023-12-26T13:00:38.462+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T13:00:38.468+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231225T000000, start_date=20231226T130035, end_date=20231226T130038
+[2023-12-26T13:00:38.494+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T13:00:38.504+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-26T21:09:42.732+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T21:09:42.738+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T21:09:42.739+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T21:09:42.753+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-25 00:00:00+00:00
+[2023-12-26T21:09:42.757+0000] {standard_task_runner.py:60} INFO - Started process 315 to run task
+[2023-12-26T21:09:42.760+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-25T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpo55m6f4e']
+[2023-12-26T21:09:42.762+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-26T21:09:42.788+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [running]> on host d26df5132269
+[2023-12-26T21:09:42.827+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-25T00:00:00+00:00'
+[2023-12-26T21:09:42.881+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T21:09:42.925+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T21:09:43.860+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    311.41405
+1   2023-12-25    14  BINANCE   1135.37965
+2   2023-12-25    18  BINANCE   1240.59045
+3   2023-12-25    20  BINANCE     97.40855
+4   2023-12-26    12     AAPL     95.00000
+5   2023-12-26    12     AMZN    150.00000
+6   2023-12-26    12  BINANCE    636.16615
+7   2023-12-26    12     MSFT    550.00000
+8   2023-12-26    16     AAPL  24690.00000
+9   2023-12-26    16     AMZN  17457.00000
+10  2023-12-26    16  BINANCE    328.76657
+11  2023-12-26    16     MSFT   9787.00000
+12  2023-12-26    20     AAPL   3471.00000
+13  2023-12-26    20     AMZN   1243.00000
+14  2023-12-26    20     MSFT    533.00000
+[2023-12-26T21:09:43.861+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_0.parquet' already exists.
+[2023-12-26T21:09:43.929+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    311.41405
+1   2023-12-25    14  BINANCE   1135.37965
+2   2023-12-25    18  BINANCE   1240.59045
+3   2023-12-25    20  BINANCE     97.40855
+4   2023-12-26    12     AAPL     95.00000
+5   2023-12-26    12     AMZN    150.00000
+6   2023-12-26    12  BINANCE    636.16615
+7   2023-12-26    12     MSFT    550.00000
+8   2023-12-26    16     AAPL  24690.00000
+9   2023-12-26    16     AMZN  17457.00000
+10  2023-12-26    16  BINANCE    328.76657
+11  2023-12-26    16     MSFT   9787.00000
+12  2023-12-26    20     AAPL   3471.00000
+13  2023-12-26    20     AMZN   1243.00000
+14  2023-12-26    20     MSFT    533.00000
+[2023-12-26T21:09:43.932+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T21:09:43.937+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231225T000000, start_date=20231226T210942, end_date=20231226T210943
+[2023-12-26T21:09:43.977+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T21:09:43.988+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-26T21:45:33.673+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T21:45:33.682+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T21:45:33.683+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T21:45:33.701+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-25 00:00:00+00:00
+[2023-12-26T21:45:33.706+0000] {standard_task_runner.py:60} INFO - Started process 307 to run task
+[2023-12-26T21:45:33.710+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-25T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpatxv_r0u']
+[2023-12-26T21:45:33.713+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-26T21:45:33.750+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [running]> on host b20a8cc54a2d
+[2023-12-26T21:45:33.804+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-25T00:00:00+00:00'
+[2023-12-26T21:45:33.872+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T21:45:33.922+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T21:45:35.217+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    435.97967
+1   2023-12-25    14  BINANCE   1589.53151
+2   2023-12-25    18  BINANCE   1736.82663
+3   2023-12-25    20  BINANCE    136.37197
+4   2023-12-26    12     AAPL    133.00000
+5   2023-12-26    12     AMZN    210.00000
+6   2023-12-26    12  BINANCE    890.63261
+7   2023-12-26    12     MSFT    770.00000
+8   2023-12-26    16     AAPL  41354.00000
+9   2023-12-26    16     AMZN  27159.00000
+10  2023-12-26    16  BINANCE    533.36053
+11  2023-12-26    16     MSFT  16405.00000
+12  2023-12-26    20     AAPL  14073.00000
+13  2023-12-26    20     AMZN   9635.00000
+14  2023-12-26    20  BINANCE      0.81576
+15  2023-12-26    20     MSFT   4341.00000
+16  2023-12-26    21     AMZN     28.00000
+17  2023-12-26    21  BINANCE     27.33164
+[2023-12-26T21:45:35.219+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_0.parquet' already exists.
+[2023-12-26T21:45:35.288+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    435.97967
+1   2023-12-25    14  BINANCE   1589.53151
+2   2023-12-25    18  BINANCE   1736.82663
+3   2023-12-25    20  BINANCE    136.37197
+4   2023-12-26    12     AAPL    133.00000
+5   2023-12-26    12     AMZN    210.00000
+6   2023-12-26    12  BINANCE    890.63261
+7   2023-12-26    12     MSFT    770.00000
+8   2023-12-26    16     AAPL  41354.00000
+9   2023-12-26    16     AMZN  27159.00000
+10  2023-12-26    16  BINANCE    533.36053
+11  2023-12-26    16     MSFT  16405.00000
+12  2023-12-26    20     AAPL  14073.00000
+13  2023-12-26    20     AMZN   9635.00000
+14  2023-12-26    20  BINANCE      0.81576
+15  2023-12-26    20     MSFT   4341.00000
+16  2023-12-26    21     AMZN     28.00000
+17  2023-12-26    21  BINANCE     27.33164
+[2023-12-26T21:45:35.292+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T21:45:35.298+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231225T000000, start_date=20231226T214533, end_date=20231226T214535
+[2023-12-26T21:45:35.330+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T21:45:35.342+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-26T22:32:59.794+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T22:32:59.800+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [queued]>
+[2023-12-26T22:32:59.800+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T22:32:59.813+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-25 00:00:00+00:00
+[2023-12-26T22:32:59.819+0000] {standard_task_runner.py:60} INFO - Started process 306 to run task
+[2023-12-26T22:32:59.822+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-25T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpm7qnf203']
+[2023-12-26T22:32:59.824+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-26T22:32:59.856+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-25T00:00:00+00:00 [running]> on host f81c64188a37
+[2023-12-26T22:32:59.906+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-25T00:00:00+00:00'
+[2023-12-26T22:32:59.974+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T22:33:00.027+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T22:33:01.433+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    498.26248
+1   2023-12-25    14  BINANCE   1816.60744
+2   2023-12-25    18  BINANCE   1984.94472
+3   2023-12-25    20  BINANCE    155.85368
+4   2023-12-26    12     AAPL    152.00000
+5   2023-12-26    12     AMZN    240.00000
+6   2023-12-26    12  BINANCE   1017.86584
+7   2023-12-26    12     MSFT    880.00000
+8   2023-12-26    16     AAPL  49686.00000
+9   2023-12-26    16     AMZN  32010.00000
+10  2023-12-26    16  BINANCE    635.65751
+11  2023-12-26    16     MSFT  19714.00000
+12  2023-12-26    20     AAPL  19374.00000
+13  2023-12-26    20     AMZN  13831.00000
+14  2023-12-26    20  BINANCE      1.22364
+15  2023-12-26    20     MSFT   6245.00000
+16  2023-12-26    21     AMZN     56.00000
+17  2023-12-26    21  BINANCE     54.66328
+18  2023-12-26    22  BINANCE      0.57445
+[2023-12-26T22:33:01.434+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_0.parquet' already exists.
+[2023-12-26T22:33:01.510+0000] {logging_mixin.py:188} INFO -           date  hour        s        sum_v
+0   2023-12-25    13  BINANCE    498.26248
+1   2023-12-25    14  BINANCE   1816.60744
+2   2023-12-25    18  BINANCE   1984.94472
+3   2023-12-25    20  BINANCE    155.85368
+4   2023-12-26    12     AAPL    152.00000
+5   2023-12-26    12     AMZN    240.00000
+6   2023-12-26    12  BINANCE   1017.86584
+7   2023-12-26    12     MSFT    880.00000
+8   2023-12-26    16     AAPL  49686.00000
+9   2023-12-26    16     AMZN  32010.00000
+10  2023-12-26    16  BINANCE    635.65751
+11  2023-12-26    16     MSFT  19714.00000
+12  2023-12-26    20     AAPL  19374.00000
+13  2023-12-26    20     AMZN  13831.00000
+14  2023-12-26    20  BINANCE      1.22364
+15  2023-12-26    20     MSFT   6245.00000
+16  2023-12-26    21     AMZN     56.00000
+17  2023-12-26    21  BINANCE     54.66328
+18  2023-12-26    22  BINANCE      0.57445
+[2023-12-26T22:33:01.515+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T22:33:01.521+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231225T000000, start_date=20231226T223259, end_date=20231226T223301
+[2023-12-26T22:33:01.561+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T22:33:01.571+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

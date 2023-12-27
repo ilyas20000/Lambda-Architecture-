@@ -1,0 +1,86 @@
+[2023-12-23T19:27:20.919+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:27:20.924+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:27:20.925+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:27:20.936+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:27:20.940+0000] {standard_task_runner.py:60} INFO - Started process 325 to run task
+[2023-12-23T19:27:20.943+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpyzhb0psh']
+[2023-12-23T19:27:20.945+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-23T19:27:20.973+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [running]> on host 96b261be22d1
+[2023-12-23T19:27:21.014+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:27:21.081+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T19:27:21.130+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T19:27:28.893+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-23T19:27:28.911+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-23T19:27:28.913+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-23T19:27:28.942+0000] {logging_mixin.py:188} INFO -                         p                          t           v
+crypto_pair                                                     
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156    0.347863
+None           189.781162 2023-12-21 03:33:31.870769  119.831923
+[2023-12-23T19:27:28.952+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T19:27:28.957+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231222T000000, start_date=20231223T192720, end_date=20231223T192728
+[2023-12-23T19:27:29.013+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T19:27:29.020+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-23T19:49:26.190+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:49:26.195+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:49:26.196+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:49:26.206+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:49:26.211+0000] {standard_task_runner.py:60} INFO - Started process 324 to run task
+[2023-12-23T19:49:26.213+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp7njf1t4q']
+[2023-12-23T19:49:26.215+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-23T19:49:26.243+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-22T00:00:00+00:00 [running]> on host ffa69df0a26f
+[2023-12-23T19:49:26.281+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:49:26.345+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T19:49:26.390+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T19:49:33.945+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-23T19:49:33.962+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-23T19:49:33.964+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-23T19:49:33.993+0000] {logging_mixin.py:188} INFO -                         p                          t           v
+crypto_pair                                                     
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156    0.347863
+None           189.781162 2023-12-21 03:33:31.870769  119.831923
+[2023-12-23T19:49:34.003+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T19:49:34.008+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231222T000000, start_date=20231223T194926, end_date=20231223T194934
+[2023-12-23T19:49:34.041+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T19:49:34.048+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

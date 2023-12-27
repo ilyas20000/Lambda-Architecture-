@@ -1,0 +1,1002 @@
+[2023-12-22T21:03:07.113+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T21:03:03.513404+00:00 [queued]>
+[2023-12-22T21:03:07.196+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T21:03:03.513404+00:00 [queued]>
+[2023-12-22T21:03:07.196+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T21:03:07.207+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-22 21:03:03.513404+00:00
+[2023-12-22T21:03:07.212+0000] {standard_task_runner.py:60} INFO - Started process 1916 to run task
+[2023-12-22T21:03:07.214+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'manual__2023-12-22T21:03:03.513404+00:00', '--job-id', '45', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpixxtp82q']
+[2023-12-22T21:03:07.216+0000] {standard_task_runner.py:88} INFO - Job 45: Subtask consume_data
+[2023-12-22T21:03:07.245+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data manual__2023-12-22T21:03:03.513404+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T21:03:07.287+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T21:03:03.513404+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T21:03:03.513404+00:00'
+[2023-12-22T21:03:07.336+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T21:03:07.371+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS finnhub_table
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T21:03:07.432+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T21:03:07.466+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS temp_avro_data
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T21:03:48.089+0000] {logging_mixin.py:188} INFO - [[{'c': ['8', '12', '41'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 86}, {'c': ['8', '41'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 200}, {'c': ['12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715738, 'v': 3}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715759, 'v': 18}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715759, 'v': 50}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715762, 'v': 32}, {'c': ['1'], 'p': 193.59, 's': 'AAPL', 't': 1703278715758, 'v': 100}, {'c': ['1'], 'p': 193.59, 's': 'AAPL', 't': 1703278715758, 'v': 100}, {'c': ['1'], 'p': 193.59, 's': 'AAPL', 't': 1703278715759, 'v': 200}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 200}], [{'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 100}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 100}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 100}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 5}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 10}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715769, 'v': 100}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715770, 'v': 178}, {'c': ['1', '12'], 'p': 193.5899, 's': 'AAPL', 't': 1703278715773, 'v': 6}, {'c': ['1'], 'p': 193.582, 's': 'AAPL', 't': 1703278715777, 'v': 110}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715784, 'v': 35}], [{'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715786, 'v': 2}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715786, 'v': 1}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715789, 'v': 11}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 3}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 14}, {'c': ['8', '12', '41'], 'p': 374.4, 's': 'MSFT', 't': 1703278715739, 'v': 5}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 86}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 30}], [{'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715740, 'v': 42}, {'c': ['1', '12'], 'p': 193.59, 's': 'AAPL', 't': 1703278715790, 'v': 27}, {'c': ['1', '12'], 'p': 193.59, 's': 'AAPL', 't': 1703278715791, 'v': 4}, {'c': ['1'], 'p': 374.385, 's': 'MSFT', 't': 1703278715798, 'v': 100}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715658, 'v': 0.00218}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715753, 'v': 18}, {'c': ['8', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 100}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 15}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 50}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 35}], [{'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 82}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715759, 'v': 18}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715759, 'v': 50}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715762, 'v': 32}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715786, 'v': 2}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715681, 'v': 0.00218}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715786, 'v': 1}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715789, 'v': 11}, {'c': [], 'p': 374.385, 's': 'MSFT', 't': 1703278715798, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 74}], [{'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 66}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 74}, {'c': ['1', '8'], 'p': 374.39, 's': 'MSFT', 't': 1703278715833, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715835, 'v': 5}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715836, 'v': 13}, {'c': ['1', '8'], 'p': 193.59, 's': 'AAPL', 't': 1703278715832, 'v': 100}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 100}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 5}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715706, 'v': 0.00218}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 100}], [{'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 200}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 100}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715836, 'v': 24}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 74}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 66}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715832, 'v': 74}, {'c': ['8', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715833, 'v': 100}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715835, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715836, 'v': 13}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715731, 'v': 0.00175}], [{'c': ['1', '32', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278715889, 'v': 1}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715741, 'v': 0.00403}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715892, 'v': 17}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715892, 'v': 71}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715893, 'v': 3}], [{'c': ['1', '12'], 'p': 374.3874, 's': 'MSFT', 't': 1703278715893, 'v': 3}, {'c': ['8'], 'p': 193.56, 's': 'AAPL', 't': 1703278703355, 'v': 100}], [{'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715899, 'v': 76}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715905, 'v': 1}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715892, 'v': 17}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715892, 'v': 71}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715893, 'v': 3}, {'c': ['12'], 'p': 374.3874, 's': 'MSFT', 't': 1703278715893, 'v': 3}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715899, 'v': 76}, {'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715905, 'v': 1}, {'c': ['1'], 'p': 374.365, 's': 'MSFT', 't': 1703278715936, 'v': 100}, {'c': [], 'p': 374.365, 's': 'MSFT', 't': 1703278715936, 'v': 100}]]
+[2023-12-22T21:03:48.091+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.4,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715738,
+                                86
+                            )
+                        
+[2023-12-22T21:03:50.284+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.4,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715738,
+                                200
+                            )
+                        
+[2023-12-22T21:03:52.443+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.38,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715738,
+                                3
+                            )
+                        
+[2023-12-22T21:03:54.982+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715759,
+                                18
+                            )
+                        
+[2023-12-22T21:03:57.111+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715759,
+                                50
+                            )
+                        
+[2023-12-22T21:03:59.263+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715762,
+                                32
+                            )
+                        
+[2023-12-22T21:04:01.406+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715758,
+                                100
+                            )
+                        
+[2023-12-22T21:04:03.595+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715758,
+                                100
+                            )
+                        
+[2023-12-22T21:04:06.155+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715759,
+                                200
+                            )
+                        
+[2023-12-22T21:04:08.366+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                200
+                            )
+                        
+[2023-12-22T21:04:10.541+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                100
+                            )
+                        
+[2023-12-22T21:04:13.129+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                100
+                            )
+                        
+[2023-12-22T21:04:15.680+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                100
+                            )
+                        
+[2023-12-22T21:04:18.248+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                5
+                            )
+                        
+[2023-12-22T21:04:21.985+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                10
+                            )
+                        
+[2023-12-22T21:04:25.290+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715769,
+                                100
+                            )
+                        
+[2023-12-22T21:04:28.513+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715770,
+                                178
+                            )
+                        
+[2023-12-22T21:04:31.272+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5899,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715773,
+                                6
+                            )
+                        
+[2023-12-22T21:04:34.039+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.582,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715777,
+                                110
+                            )
+                        
+[2023-12-22T21:04:36.843+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715784,
+                                35
+                            )
+                        
+[2023-12-22T21:04:40.008+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715786,
+                                2
+                            )
+                        
+[2023-12-22T21:04:43.203+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715786,
+                                1
+                            )
+                        
+[2023-12-22T21:04:46.430+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715789,
+                                11
+                            )
+                        
+[2023-12-22T21:04:49.629+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715738,
+                                5
+                            )
+                        
+[2023-12-22T21:04:52.418+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                5
+                            )
+                        
+[2023-12-22T21:04:55.241+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                3
+                            )
+                        
+[2023-12-22T21:04:58.420+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                14
+                            )
+                        
+[2023-12-22T21:05:02.161+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.4,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                5
+                            )
+                        
+[2023-12-22T21:05:05.279+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                86
+                            )
+                        
+[2023-12-22T21:05:09.450+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715739,
+                                30
+                            )
+                        
+[2023-12-22T21:05:12.768+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715740,
+                                42
+                            )
+                        
+[2023-12-22T21:05:16.243+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715790,
+                                27
+                            )
+                        
+[2023-12-22T21:05:19.281+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715791,
+                                4
+                            )
+                        
+[2023-12-22T21:05:22.181+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.385,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715798,
+                                100
+                            )
+                        
+[2023-12-22T21:05:25.476+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278715658,
+                                0.00218
+                            )
+                        
+[2023-12-22T21:05:28.284+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715753,
+                                18
+                            )
+                        
+[2023-12-22T21:05:31.141+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715756,
+                                100
+                            )
+                        
+[2023-12-22T21:05:34.059+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715756,
+                                15
+                            )
+                        
+[2023-12-22T21:05:36.863+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715756,
+                                50
+                            )
+                        
+[2023-12-22T21:05:40.130+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715756,
+                                35
+                            )
+                        
+[2023-12-22T21:05:42.851+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715756,
+                                82
+                            )
+                        
+[2023-12-22T21:05:45.613+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715759,
+                                18
+                            )
+                        
+[2023-12-22T21:05:48.881+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715759,
+                                50
+                            )
+                        
+[2023-12-22T21:05:52.117+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.37,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715762,
+                                32
+                            )
+                        
+[2023-12-22T21:05:55.240+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715786,
+                                2
+                            )
+                        
+[2023-12-22T21:05:58.480+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278715681,
+                                0.00218
+                            )
+                        
+[2023-12-22T21:06:01.322+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715786,
+                                1
+                            )
+                        
+[2023-12-22T21:06:04.159+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715789,
+                                11
+                            )
+                        
+[2023-12-22T21:06:07.423+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.385,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715798,
+                                100
+                            )
+                        
+[2023-12-22T21:06:10.251+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                74
+                            )
+                        
+[2023-12-22T21:06:13.540+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                66
+                            )
+                        
+[2023-12-22T21:06:16.806+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                74
+                            )
+                        
+[2023-12-22T21:06:20.706+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715833,
+                                100
+                            )
+                        
+[2023-12-22T21:06:23.534+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715835,
+                                5
+                            )
+                        
+[2023-12-22T21:06:26.848+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                13
+                            )
+                        
+[2023-12-22T21:06:31.163+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.59,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                100
+                            )
+                        
+[2023-12-22T21:06:34.014+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                100
+                            )
+                        
+[2023-12-22T21:06:37.285+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                5
+                            )
+                        
+[2023-12-22T21:06:40.449+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278715706,
+                                0.00218
+                            )
+                        
+[2023-12-22T21:06:44.825+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                100
+                            )
+                        
+[2023-12-22T21:06:47.685+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                200
+                            )
+                        
+[2023-12-22T21:06:50.895+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                100
+                            )
+                        
+[2023-12-22T21:06:53.664+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                24
+                            )
+                        
+[2023-12-22T21:06:56.475+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                74
+                            )
+                        
+[2023-12-22T21:06:59.676+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                66
+                            )
+                        
+[2023-12-22T21:07:02.528+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715832,
+                                74
+                            )
+                        
+[2023-12-22T21:07:05.404+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715833,
+                                100
+                            )
+                        
+[2023-12-22T21:07:08.337+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715835,
+                                5
+                            )
+                        
+[2023-12-22T21:07:12.222+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715836,
+                                13
+                            )
+                        
+[2023-12-22T21:07:15.489+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278715731,
+                                0.00175
+                            )
+                        
+[2023-12-22T21:07:18.312+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715889,
+                                1
+                            )
+                        
+[2023-12-22T21:07:21.342+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278715741,
+                                0.00403
+                            )
+                        
+[2023-12-22T21:07:24.270+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715892,
+                                17
+                            )
+                        
+[2023-12-22T21:07:27.167+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715892,
+                                71
+                            )
+                        
+[2023-12-22T21:07:30.017+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715893,
+                                3
+                            )
+                        
+[2023-12-22T21:07:32.828+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.3874,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715893,
+                                3
+                            )
+                        
+[2023-12-22T21:07:36.072+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.56,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278703355,
+                                100
+                            )
+                        
+[2023-12-22T21:07:39.264+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715899,
+                                76
+                            )
+                        
+[2023-12-22T21:07:42.499+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715905,
+                                1
+                            )
+                        
+[2023-12-22T21:07:45.276+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715892,
+                                17
+                            )
+                        
+[2023-12-22T21:07:48.056+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715892,
+                                71
+                            )
+                        
+[2023-12-22T21:07:50.870+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715893,
+                                3
+                            )
+                        
+[2023-12-22T21:07:53.673+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.3874,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715893,
+                                3
+                            )
+                        
+[2023-12-22T21:07:56.491+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715899,
+                                76
+                            )
+                        
+[2023-12-22T21:07:59.281+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.39,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715905,
+                                1
+                            )
+                        
+[2023-12-22T21:08:02.489+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.365,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715936,
+                                100
+                            )
+                        
+[2023-12-22T21:08:05.270+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.365,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278715936,
+                                100
+                            )
+                        
+[2023-12-22T21:08:08.070+0000] {logging_mixin.py:188} INFO - 
+Inserting batch into Hive...
+[2023-12-22T21:08:08.075+0000] {hive.py:475} INFO - 
+            INSERT INTO TABLE finnhub_table 
+            SELECT *
+            FROM temp_avro_data
+        
+[2023-12-22T21:09:50.870+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to success. Terminating instance.
+[2023-12-22T21:09:50.874+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 1916. PIDs of all processes in the group: [1916]
+[2023-12-22T21:09:50.875+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 1916
+[2023-12-22T21:09:50.876+0000] {taskinstance.py:2451} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-12-22T21:09:50.878+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: Task received SIGTERM signal
+[2023-12-22T21:09:50.882+0000] {logging_mixin.py:188} INFO - Error: KafkaError{code=_MAX_POLL_EXCEEDED,val=-147,str="Application maximum poll interval (300000ms) exceeded by 1ms"}
+[2023-12-22T21:09:50.882+0000] {logging_mixin.py:188} INFO - finish
+[2023-12-22T21:10:25.856+0000] {local_task_job_runner.py:121} ERROR - Received SIGTERM. Terminating subprocesses
+[2023-12-22T21:10:25.859+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 1916. PIDs of all processes in the group: [1916]
+[2023-12-22T21:10:25.860+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 1916
+[2023-12-22T21:10:25.861+0000] {taskinstance.py:2451} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-12-22T21:10:25.909+0000] {local_task_job_runner.py:121} ERROR - Received SIGTERM. Terminating subprocesses

@@ -1,0 +1,36 @@
+[2023-12-22T22:49:11.192+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-22T22:49:07.433998+00:00 [queued]>
+[2023-12-22T22:49:11.197+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-22T22:49:07.433998+00:00 [queued]>
+[2023-12-22T22:49:11.197+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T22:49:11.208+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-22 22:49:07.433998+00:00
+[2023-12-22T22:49:11.212+0000] {standard_task_runner.py:60} INFO - Started process 1012 to run task
+[2023-12-22T22:49:11.215+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'manual__2023-12-22T22:49:07.433998+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp7rekh9gq']
+[2023-12-22T22:49:11.220+0000] {standard_task_runner.py:88} INFO - Job 20: Subtask batch_0
+[2023-12-22T22:49:11.283+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 manual__2023-12-22T22:49:07.433998+00:00 [running]> on host f9bc372cbc19
+[2023-12-22T22:49:11.338+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T22:49:07.433998+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T22:49:07.433998+00:00'
+[2023-12-22T22:49:11.393+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T22:49:11.430+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+                WHERE  t between 1703285351430 AND 1703285351430
+            
+[2023-12-22T22:49:12.012+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in batch_0
+    b0.batch_proc_0()
+  File "/opt/airflow/dags/batch_proc_0.py", line 40, in batch_proc_0
+    df['t'] = pd.to_datetime(df['t'])
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: 't'
+[2023-12-22T22:49:12.023+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_0, execution_date=20231222T224907, start_date=20231222T224911, end_date=20231222T224912
+[2023-12-22T22:49:12.031+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 20 for task batch_0 ('t'; 1012)
+[2023-12-22T22:49:12.071+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T22:49:12.079+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

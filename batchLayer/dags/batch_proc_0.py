@@ -50,17 +50,17 @@ def batch_proc_0():
         with open('/tmp/batchViews/parquet_output.parquet', 'x'):
             pass  # This block is empty, creating an empty file
 
-        print(f"File '/tmp/batchViews/parquet_output.parquet' created successfully.")
+        print(f"File '/tmp/batchViews/parquet_output_0.parquet' created successfully.")
     except FileExistsError:
-        print(f"File '/tmp/batchViews/parquet_output.parquet' already exists.")
+        print(f"File '/tmp/batchViews/parquet_output_0.parquet' already exists.")
 
     # Write the result to a Parquet file
-    parquet_file_path = '/tmp/batchViews/parquet_output.parquet'
+    parquet_file_path = '/tmp/batchViews/parquet_output_0.parquet'
     table = pa.Table.from_pandas(result)
     pq.write_table(table, parquet_file_path)
 
     #read data
-    df = pq.read_pandas('/tmp/batchViews/parquet_output.parquet').to_pandas()
+    df = pq.read_pandas('/tmp/batchViews/parquet_output_0.parquet').to_pandas()
     print(df)
 
 

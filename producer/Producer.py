@@ -55,10 +55,10 @@ def on_open(ws):
     ws.send('{"type":"subscribe","symbol":"AAPL"}')
     ws.send('{"type":"subscribe","symbol":"AMZN"}')
     ws.send('{"type":"subscribe","symbol":"MSFT"}')
-    ws.send('{"type":"subscribe","symbol":"GBP"}')
     ws.send('{"type":"subscribe","symbol":"BINANCE:ETHUSDT"}')
     ws.send('{"type":"subscribe","symbol":"BINANCE:BTCUSDT"}')
-
+    ws.send('{"type":"subscribe","symbol":"BINANCE:EURUSD"}')
+    ws.send('{"type":"subscribe","symbol":"BINANCE:GBPUSD"}')
 
 if __name__ == "__main__":
     # Start Kafka producer worker thread

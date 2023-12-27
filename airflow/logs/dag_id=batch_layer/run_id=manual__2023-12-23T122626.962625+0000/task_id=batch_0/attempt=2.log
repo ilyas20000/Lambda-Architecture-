@@ -1,0 +1,35 @@
+[2023-12-23T12:36:47.191+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:26:26.962625+00:00 [queued]>
+[2023-12-23T12:36:47.195+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:26:26.962625+00:00 [queued]>
+[2023-12-23T12:36:47.196+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-23T12:36:47.207+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-23 12:26:26.962625+00:00
+[2023-12-23T12:36:47.211+0000] {standard_task_runner.py:60} INFO - Started process 1376 to run task
+[2023-12-23T12:36:47.213+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'manual__2023-12-23T12:26:26.962625+00:00', '--job-id', '21', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp_otfbzyz']
+[2023-12-23T12:36:47.215+0000] {standard_task_runner.py:88} INFO - Job 21: Subtask batch_0
+[2023-12-23T12:36:47.240+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:26:26.962625+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T12:36:47.285+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T12:26:26.962625+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T12:26:26.962625+00:00'
+[2023-12-23T12:36:47.332+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T12:36:47.367+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T12:36:48.993+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in batch_0
+    b0.batch_proc_0()
+  File "/opt/airflow/dags/batch_proc_0.py", line 64, in batch_proc_0
+    transformed_data = transform_data(result.copy())
+  File "/opt/airflow/dags/batch_proc_0.py", line 10, in transform_data
+    df.set_index('t', inplace=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 5859, in set_index
+    raise KeyError(f"None of {missing} are in the columns")
+KeyError: "None of ['t'] are in the columns"
+[2023-12-23T12:36:49.003+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=batch_0, execution_date=20231223T122626, start_date=20231223T123647, end_date=20231223T123649
+[2023-12-23T12:36:49.014+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 21 for task batch_0 ("None of ['t'] are in the columns"; 1376)
+[2023-12-23T12:36:49.032+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T12:36:49.040+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

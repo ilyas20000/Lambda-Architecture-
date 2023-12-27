@@ -1,0 +1,350 @@
+[2023-12-24T15:36:39.860+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:36:39.875+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:36:39.876+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T15:36:39.898+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T15:36:39.906+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T15:36:39.910+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp1v_hp4o9']
+[2023-12-24T15:36:39.914+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T15:36:40.064+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host b2aeaa9190f5
+[2023-12-24T15:36:40.301+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T15:36:48.323+0000] {TSocket.py:126} ERROR - failed to resolve sockaddr for hive-server:10000
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 123, in open
+    addrs = self._resolveAddr()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 37, in _resolveAddr
+    return socket.getaddrinfo(self.host,
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+[2023-12-24T15:36:48.347+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 123, in open
+    addrs = self._resolveAddr()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 37, in _resolveAddr
+    return socket.getaddrinfo(self.host,
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 127, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg, inner=gai)
+thrift.transport.TTransport.TTransportException: failed to resolve sockaddr for hive-server:10000
+[2023-12-24T15:36:48.414+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T153639, end_date=20231224T153648
+[2023-12-24T15:36:48.476+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (failed to resolve sockaddr for hive-server:10000; 117)
+[2023-12-24T15:36:48.510+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T15:36:48.528+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T15:41:42.290+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:41:42.299+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:41:42.300+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T15:41:42.320+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T15:41:42.326+0000] {standard_task_runner.py:60} INFO - Started process 118 to run task
+[2023-12-24T15:41:42.330+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpsxtmb1tu']
+[2023-12-24T15:41:42.333+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T15:41:42.386+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host 83b53490fe78
+[2023-12-24T15:41:42.456+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T15:41:42.461+0000] {TSocket.py:142} INFO - Could not connect to ('172.21.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T15:41:42.463+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T15:41:42.464+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T15:41:42.481+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T154142, end_date=20231224T154142
+[2023-12-24T15:41:42.494+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.21.0.14', 10000)]; 118)
+[2023-12-24T15:41:42.544+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T15:41:42.577+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T15:51:17.747+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:51:17.754+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:51:17.754+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T15:51:17.768+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T15:51:17.773+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T15:51:17.777+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpha13bhrq']
+[2023-12-24T15:51:17.779+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T15:51:17.813+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host be1f0ffa1f05
+[2023-12-24T15:51:17.862+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T15:51:17.866+0000] {TSocket.py:142} INFO - Could not connect to ('172.22.0.13', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T15:51:17.867+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.22.0.13', 10000)]
+[2023-12-24T15:51:17.867+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.22.0.13', 10000)]
+[2023-12-24T15:51:17.876+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T155117, end_date=20231224T155117
+[2023-12-24T15:51:17.913+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.22.0.13', 10000)]; 117)
+[2023-12-24T15:51:17.949+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T15:51:17.963+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T17:03:01.104+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:03:01.114+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:03:01.114+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T17:03:01.131+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T17:03:01.137+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T17:03:01.140+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpkxsv6naf']
+[2023-12-24T17:03:01.142+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T17:03:01.367+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host 1e3b18e1227a
+[2023-12-24T17:03:01.441+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T17:03:01.446+0000] {TSocket.py:142} INFO - Could not connect to ('172.20.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T17:03:01.447+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.20.0.14', 10000)]
+[2023-12-24T17:03:01.448+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.20.0.14', 10000)]
+[2023-12-24T17:03:01.460+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T170301, end_date=20231224T170301
+[2023-12-24T17:03:01.478+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.20.0.14', 10000)]; 117)
+[2023-12-24T17:03:01.514+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T17:03:01.537+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T17:48:10.207+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:48:10.274+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:48:10.275+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T17:48:10.289+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T17:48:10.293+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T17:48:10.295+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmptaekv561']
+[2023-12-24T17:48:10.297+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T17:48:10.335+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host 16ee60c2f1f1
+[2023-12-24T17:48:10.384+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T17:48:10.388+0000] {TSocket.py:142} INFO - Could not connect to ('172.21.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T17:48:10.390+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T17:48:10.390+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T17:48:10.404+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T174810, end_date=20231224T174810
+[2023-12-24T17:48:10.416+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.21.0.14', 10000)]; 117)
+[2023-12-24T17:48:10.428+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T17:48:10.443+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T18:11:13.744+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:11:13.754+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:11:13.755+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T18:11:13.769+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T18:11:13.773+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T18:11:13.775+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpqqrq0srr']
+[2023-12-24T18:11:13.778+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T18:11:13.870+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host c0475b589502
+[2023-12-24T18:11:14.101+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T18:11:14.106+0000] {TSocket.py:142} INFO - Could not connect to ('172.20.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T18:11:14.108+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.20.0.14', 10000)]
+[2023-12-24T18:11:14.109+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.20.0.14', 10000)]
+[2023-12-24T18:11:14.119+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T181113, end_date=20231224T181114
+[2023-12-24T18:11:14.132+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.20.0.14', 10000)]; 117)
+[2023-12-24T18:11:14.148+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T18:11:14.193+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T19:01:03.849+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:01:03.857+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:01:03.858+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T19:01:03.870+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T19:01:03.874+0000] {standard_task_runner.py:60} INFO - Started process 102 to run task
+[2023-12-24T19:01:03.876+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp_yhmpmpb']
+[2023-12-24T19:01:03.878+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T19:01:03.911+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host fffebfb72bbc
+[2023-12-24T19:01:03.989+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T19:01:03.992+0000] {TSocket.py:142} INFO - Could not connect to ('172.21.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T19:01:03.994+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T19:01:03.994+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.21.0.14', 10000)]
+[2023-12-24T19:01:04.005+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T190103, end_date=20231224T190104
+[2023-12-24T19:01:04.015+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.21.0.14', 10000)]; 102)
+[2023-12-24T19:01:04.050+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T19:01:04.094+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T19:06:01.422+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:06:01.429+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:06:01.429+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T19:06:01.446+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 00:00:00+00:00
+[2023-12-24T19:06:01.453+0000] {standard_task_runner.py:60} INFO - Started process 117 to run task
+[2023-12-24T19:06:01.458+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpn0t14hm3']
+[2023-12-24T19:06:01.460+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask consume_data
+[2023-12-24T19:06:01.501+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data scheduled__2023-12-23T00:00:00+00:00 [running]> on host 465cb068660d
+[2023-12-24T19:06:01.613+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T19:06:01.619+0000] {TSocket.py:142} INFO - Could not connect to ('172.24.0.14', 10000)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 137, in open
+    handle.connect(sockaddr)
+ConnectionRefusedError: [Errno 111] Connection refused
+[2023-12-24T19:06:01.622+0000] {TSocket.py:145} ERROR - Could not connect to any of [('172.24.0.14', 10000)]
+[2023-12-24T19:06:01.623+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in save_data_to_hive
+    hive_consumer.kafka_consumer_worker()
+  File "/opt/airflow/dags/batch_consumer.py", line 124, in kafka_consumer_worker
+    create_hive_table()
+  File "/opt/airflow/dags/batch_consumer.py", line 52, in create_hive_table
+    connection = hive.connect(host=hive_host, port=hive_port, database=hive_database)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 143, in connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyhive/hive.py", line 269, in __init__
+    self._transport.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 74, in open
+    self._trans.open()
+  File "/home/airflow/.local/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 146, in open
+    raise TTransportException(type=TTransportException.NOT_OPEN, message=msg)
+thrift.transport.TTransport.TTransportException: Could not connect to any of [('172.24.0.14', 10000)]
+[2023-12-24T19:06:01.642+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=consume_data, execution_date=20231223T000000, start_date=20231224T190601, end_date=20231224T190601
+[2023-12-24T19:06:01.669+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task consume_data (Could not connect to any of [('172.24.0.14', 10000)]; 117)
+[2023-12-24T19:06:01.711+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T19:06:01.738+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

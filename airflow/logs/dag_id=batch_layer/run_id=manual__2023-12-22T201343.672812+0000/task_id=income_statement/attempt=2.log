@@ -1,0 +1,25 @@
+[2023-12-22T20:18:49.043+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.income_statement manual__2023-12-22T20:13:43.672812+00:00 [queued]>
+[2023-12-22T20:18:49.106+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.income_statement manual__2023-12-22T20:13:43.672812+00:00 [queued]>
+[2023-12-22T20:18:49.107+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-22T20:18:49.118+0000] {taskinstance.py:2192} INFO - Executing <Task(SparkSubmitOperator): income_statement> on 2023-12-22 20:13:43.672812+00:00
+[2023-12-22T20:18:49.121+0000] {standard_task_runner.py:60} INFO - Started process 1183 to run task
+[2023-12-22T20:18:49.123+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'income_statement', 'manual__2023-12-22T20:13:43.672812+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp7gp_ewhe']
+[2023-12-22T20:18:49.125+0000] {standard_task_runner.py:88} INFO - Job 26: Subtask income_statement
+[2023-12-22T20:18:49.153+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.income_statement manual__2023-12-22T20:13:43.672812+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T20:18:49.190+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='income_statement' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T20:13:43.672812+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T20:13:43.672812+00:00'
+[2023-12-22T20:18:49.195+0000] {base.py:83} INFO - Using connection ID 'spark_default' for task execution.
+[2023-12-22T20:18:49.196+0000] {spark_submit.py:351} INFO - Spark-Submit cmd: spark-submit --master spark://spark-master:7077 --name arrow-spark --queue root.default /opt/bitnami/spark/jobs/dags/batch_proc_0.py
+[2023-12-22T20:18:49.202+0000] {spark_submit.py:521} INFO - /home/airflow/.local/bin/spark-submit: line 27: /opt/spark/bin/spark-class: No such file or directory
+[2023-12-22T20:18:49.207+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 160, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 452, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master spark://spark-master:7077 --name arrow-spark --queue root.default /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 127.
+[2023-12-22T20:18:49.210+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=income_statement, execution_date=20231222T201343, start_date=20231222T201849, end_date=20231222T201849
+[2023-12-22T20:18:49.219+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 26 for task income_statement (Cannot execute: spark-submit --master spark://spark-master:7077 --name arrow-spark --queue root.default /opt/bitnami/spark/jobs/dags/batch_proc_0.py. Error code is: 127.; 1183)
+[2023-12-22T20:18:49.256+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-22T20:18:49.264+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

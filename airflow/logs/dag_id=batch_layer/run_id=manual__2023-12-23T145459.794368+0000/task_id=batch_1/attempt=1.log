@@ -1,0 +1,49 @@
+[2023-12-23T14:55:28.822+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:54:59.794368+00:00 [queued]>
+[2023-12-23T14:55:28.827+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:54:59.794368+00:00 [queued]>
+[2023-12-23T14:55:28.828+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T14:55:28.838+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 14:54:59.794368+00:00
+[2023-12-23T14:55:28.843+0000] {standard_task_runner.py:60} INFO - Started process 3278 to run task
+[2023-12-23T14:55:28.845+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'manual__2023-12-23T14:54:59.794368+00:00', '--job-id', '35', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpmiyorwoq']
+[2023-12-23T14:55:28.847+0000] {standard_task_runner.py:88} INFO - Job 35: Subtask batch_1
+[2023-12-23T14:55:28.872+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:54:59.794368+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T14:55:28.915+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T14:54:59.794368+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T14:54:59.794368+00:00'
+[2023-12-23T14:55:28.957+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T14:55:28.989+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T14:55:30.758+0000] {logging_mixin.py:188} INFO -                0        1        2              3          4
+0      41981.100  BINANCE  BTCUSDT  1702848258958    0.00050
+1      41981.100  BINANCE  BTCUSDT  1702848259251    0.00119
+2      41981.110  BINANCE  BTCUSDT  1702848270970    0.00684
+3      41977.980  BINANCE  BTCUSDT  1702848300006    0.00243
+4      41977.990  BINANCE  BTCUSDT  1702848300006    0.00238
+...          ...      ...      ...            ...        ...
+58141    197.050     AAPL     None  1703100887700  100.00000
+58142    197.045     AAPL     None  1703100887700   28.00000
+58143    197.050     AAPL     None  1703100887700   72.00000
+58144    197.045     AAPL     None  1703100887700   29.00000
+58145    197.040     AAPL     None  1703100887700  100.00000
+
+[58146 rows x 5 columns]
+[2023-12-23T14:55:30.759+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 35, in batch_proc_1
+    df_filtered = df[df['finnhub_table.crypto_pair'].notna()]
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: 'finnhub_table.crypto_pair'
+[2023-12-23T14:55:30.769+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T145459, start_date=20231223T145528, end_date=20231223T145530
+[2023-12-23T14:55:30.777+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 35 for task batch_1 ('finnhub_table.crypto_pair'; 3278)
+[2023-12-23T14:55:30.784+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T14:55:30.793+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

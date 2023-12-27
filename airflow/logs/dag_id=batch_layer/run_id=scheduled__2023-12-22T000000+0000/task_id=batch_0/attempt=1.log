@@ -1,0 +1,203 @@
+[2023-12-23T11:15:54.463+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T11:15:54.468+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T11:15:54.468+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T11:15:54.509+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-22 00:00:00+00:00
+[2023-12-23T11:15:54.515+0000] {standard_task_runner.py:60} INFO - Started process 247 to run task
+[2023-12-23T11:15:54.519+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp9up4h0th']
+[2023-12-23T11:15:54.523+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask batch_0
+[2023-12-23T11:15:54.557+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T11:15:54.778+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T11:15:54.904+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T11:15:55.802+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T11:15:59.772+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.137137e+02
+1   2023-12-20    19        AAPL  7.402400e+05
+2   2023-12-20    19        AMZN  1.036878e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  1.540000e+02
+5   2023-12-21    21        AMZN  1.100000e+01
+6   2023-12-21    21     BINANCE  2.879510e+02
+7   2023-12-22    15        AAPL  2.448000e+03
+8   2023-12-22    15        AMZN  8.910000e+02
+9   2023-12-22    15     BINANCE  4.941000e-02
+10  2023-12-22    15        MSFT  1.107000e+03
+11  2023-12-22    20        AAPL  3.806100e+04
+12  2023-12-22    20        AMZN  3.728700e+04
+13  2023-12-22    20     BINANCE  7.712730e+00
+14  2023-12-22    20        MSFT  2.175300e+04
+15  2023-12-22    21        AAPL  2.039800e+04
+16  2023-12-22    21        AMZN  3.140000e+02
+17  2023-12-22    21     BINANCE  8.064860e+02
+18  2023-12-22    23        AAPL  6.080000e+02
+19  2023-12-22    23        AMZN  2.900000e+01
+20  2023-12-22    23     BINANCE  4.919007e+01
+21  2023-12-22    23        MSFT  4.000000e+01
+[2023-12-23T11:15:59.775+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output.parquet' already exists.
+[2023-12-23T11:15:59.834+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.137137e+02
+1   2023-12-20    19        AAPL  7.402400e+05
+2   2023-12-20    19        AMZN  1.036878e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  1.540000e+02
+5   2023-12-21    21        AMZN  1.100000e+01
+6   2023-12-21    21     BINANCE  2.879510e+02
+7   2023-12-22    15        AAPL  2.448000e+03
+8   2023-12-22    15        AMZN  8.910000e+02
+9   2023-12-22    15     BINANCE  4.941000e-02
+10  2023-12-22    15        MSFT  1.107000e+03
+11  2023-12-22    20        AAPL  3.806100e+04
+12  2023-12-22    20        AMZN  3.728700e+04
+13  2023-12-22    20     BINANCE  7.712730e+00
+14  2023-12-22    20        MSFT  2.175300e+04
+15  2023-12-22    21        AAPL  2.039800e+04
+16  2023-12-22    21        AMZN  3.140000e+02
+17  2023-12-22    21     BINANCE  8.064860e+02
+18  2023-12-22    23        AAPL  6.080000e+02
+19  2023-12-22    23        AMZN  2.900000e+01
+20  2023-12-22    23     BINANCE  4.919007e+01
+21  2023-12-22    23        MSFT  4.000000e+01
+[2023-12-23T11:15:59.839+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T11:15:59.845+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231222T000000, start_date=20231223T111554, end_date=20231223T111559
+[2023-12-23T11:15:59.905+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T11:15:59.912+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-23T19:27:13.743+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:27:13.749+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:27:13.750+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:27:13.760+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:27:13.764+0000] {standard_task_runner.py:60} INFO - Started process 299 to run task
+[2023-12-23T19:27:13.766+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp_xnl2t7f']
+[2023-12-23T19:27:13.768+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-23T19:27:13.795+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [running]> on host 96b261be22d1
+[2023-12-23T19:27:13.837+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:27:13.894+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T19:27:13.947+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T19:27:18.399+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.786930e+02
+1   2023-12-20    19        AAPL  1.306796e+06
+2   2023-12-20    19        AMZN  1.950018e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  3.220000e+02
+5   2023-12-21    21        AMZN  2.300000e+01
+6   2023-12-21    21     BINANCE  6.328740e+02
+7   2023-12-22    15        AAPL  5.712000e+03
+8   2023-12-22    15        AMZN  2.079000e+03
+9   2023-12-22    15     BINANCE  1.152900e-01
+10  2023-12-22    15        MSFT  2.583000e+03
+11  2023-12-22    20        AAPL  8.880900e+04
+12  2023-12-22    20        AMZN  8.700300e+04
+13  2023-12-22    20     BINANCE  1.799637e+01
+14  2023-12-22    20        MSFT  5.075700e+04
+15  2023-12-22    21        AAPL  5.625400e+04
+16  2023-12-22    21        AMZN  8.540000e+02
+17  2023-12-22    21     BINANCE  2.314658e+03
+18  2023-12-22    23        AAPL  2.444000e+03
+19  2023-12-22    23        AMZN  1.610000e+02
+20  2023-12-22    23     BINANCE  3.907595e+02
+21  2023-12-22    23        MSFT  2.800000e+02
+22  2023-12-23    11     BINANCE  3.753173e+02
+23  2023-12-23    13     BINANCE  6.362100e+02
+[2023-12-23T19:27:18.401+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output.parquet' already exists.
+[2023-12-23T19:27:18.442+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.786930e+02
+1   2023-12-20    19        AAPL  1.306796e+06
+2   2023-12-20    19        AMZN  1.950018e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  3.220000e+02
+5   2023-12-21    21        AMZN  2.300000e+01
+6   2023-12-21    21     BINANCE  6.328740e+02
+7   2023-12-22    15        AAPL  5.712000e+03
+8   2023-12-22    15        AMZN  2.079000e+03
+9   2023-12-22    15     BINANCE  1.152900e-01
+10  2023-12-22    15        MSFT  2.583000e+03
+11  2023-12-22    20        AAPL  8.880900e+04
+12  2023-12-22    20        AMZN  8.700300e+04
+13  2023-12-22    20     BINANCE  1.799637e+01
+14  2023-12-22    20        MSFT  5.075700e+04
+15  2023-12-22    21        AAPL  5.625400e+04
+16  2023-12-22    21        AMZN  8.540000e+02
+17  2023-12-22    21     BINANCE  2.314658e+03
+18  2023-12-22    23        AAPL  2.444000e+03
+19  2023-12-22    23        AMZN  1.610000e+02
+20  2023-12-22    23     BINANCE  3.907595e+02
+21  2023-12-22    23        MSFT  2.800000e+02
+22  2023-12-23    11     BINANCE  3.753173e+02
+23  2023-12-23    13     BINANCE  6.362100e+02
+[2023-12-23T19:27:18.450+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T19:27:18.455+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231222T000000, start_date=20231223T192713, end_date=20231223T192718
+[2023-12-23T19:27:18.476+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T19:27:18.485+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-23T19:49:19.560+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:49:19.565+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [queued]>
+[2023-12-23T19:49:19.566+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T19:49:19.576+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-22 00:00:00+00:00
+[2023-12-23T19:49:19.580+0000] {standard_task_runner.py:60} INFO - Started process 298 to run task
+[2023-12-23T19:49:19.583+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'scheduled__2023-12-22T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpe2jnnnxi']
+[2023-12-23T19:49:19.585+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask batch_0
+[2023-12-23T19:49:19.611+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 scheduled__2023-12-22T00:00:00+00:00 [running]> on host ffa69df0a26f
+[2023-12-23T19:49:19.652+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-22T00:00:00+00:00'
+[2023-12-23T19:49:19.725+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T19:49:19.771+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T19:49:23.850+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.786930e+02
+1   2023-12-20    19        AAPL  1.306796e+06
+2   2023-12-20    19        AMZN  1.950018e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  3.220000e+02
+5   2023-12-21    21        AMZN  2.300000e+01
+6   2023-12-21    21     BINANCE  6.328740e+02
+7   2023-12-22    15        AAPL  5.712000e+03
+8   2023-12-22    15        AMZN  2.079000e+03
+9   2023-12-22    15     BINANCE  1.152900e-01
+10  2023-12-22    15        MSFT  2.583000e+03
+11  2023-12-22    20        AAPL  8.880900e+04
+12  2023-12-22    20        AMZN  8.700300e+04
+13  2023-12-22    20     BINANCE  1.799637e+01
+14  2023-12-22    20        MSFT  5.075700e+04
+15  2023-12-22    21        AAPL  5.625400e+04
+16  2023-12-22    21        AMZN  8.540000e+02
+17  2023-12-22    21     BINANCE  2.314658e+03
+18  2023-12-22    23        AAPL  2.444000e+03
+19  2023-12-22    23        AMZN  1.610000e+02
+20  2023-12-22    23     BINANCE  3.907595e+02
+21  2023-12-22    23        MSFT  2.800000e+02
+22  2023-12-23    11     BINANCE  3.753173e+02
+23  2023-12-23    13     BINANCE  6.362100e+02
+[2023-12-23T19:49:23.851+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output.parquet' already exists.
+[2023-12-23T19:49:23.892+0000] {logging_mixin.py:188} INFO -           date  hour           s         sum_v
+0   2023-12-17    21     BINANCE  1.786930e+02
+1   2023-12-20    19        AAPL  1.306796e+06
+2   2023-12-20    19        AMZN  1.950018e+06
+3   2023-12-20    19  IC MARKETS  0.000000e+00
+4   2023-12-21    21        AAPL  3.220000e+02
+5   2023-12-21    21        AMZN  2.300000e+01
+6   2023-12-21    21     BINANCE  6.328740e+02
+7   2023-12-22    15        AAPL  5.712000e+03
+8   2023-12-22    15        AMZN  2.079000e+03
+9   2023-12-22    15     BINANCE  1.152900e-01
+10  2023-12-22    15        MSFT  2.583000e+03
+11  2023-12-22    20        AAPL  8.880900e+04
+12  2023-12-22    20        AMZN  8.700300e+04
+13  2023-12-22    20     BINANCE  1.799637e+01
+14  2023-12-22    20        MSFT  5.075700e+04
+15  2023-12-22    21        AAPL  5.625400e+04
+16  2023-12-22    21        AMZN  8.540000e+02
+17  2023-12-22    21     BINANCE  2.314658e+03
+18  2023-12-22    23        AAPL  2.444000e+03
+19  2023-12-22    23        AMZN  1.610000e+02
+20  2023-12-22    23     BINANCE  3.907595e+02
+21  2023-12-22    23        MSFT  2.800000e+02
+22  2023-12-23    11     BINANCE  3.753173e+02
+23  2023-12-23    13     BINANCE  6.362100e+02
+[2023-12-23T19:49:23.901+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-23T19:49:23.906+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_0, execution_date=20231222T000000, start_date=20231223T194919, end_date=20231223T194923
+[2023-12-23T19:49:23.931+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-23T19:49:23.939+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

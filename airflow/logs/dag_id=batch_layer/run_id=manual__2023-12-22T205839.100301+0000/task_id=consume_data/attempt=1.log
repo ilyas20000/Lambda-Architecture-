@@ -1,0 +1,808 @@
+[2023-12-22T20:58:42.204+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T20:58:39.100301+00:00 [queued]>
+[2023-12-22T20:58:42.287+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T20:58:39.100301+00:00 [queued]>
+[2023-12-22T20:58:42.287+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T20:58:42.302+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-22 20:58:39.100301+00:00
+[2023-12-22T20:58:42.306+0000] {standard_task_runner.py:60} INFO - Started process 1892 to run task
+[2023-12-22T20:58:42.309+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'manual__2023-12-22T20:58:39.100301+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp9637gcs2']
+[2023-12-22T20:58:42.311+0000] {standard_task_runner.py:88} INFO - Job 44: Subtask consume_data
+[2023-12-22T20:58:42.345+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data manual__2023-12-22T20:58:39.100301+00:00 [running]> on host 1e7ecb9f94ff
+[2023-12-22T20:58:42.387+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T20:58:39.100301+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T20:58:39.100301+00:00'
+[2023-12-22T20:58:42.457+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T20:58:42.532+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS finnhub_table
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T20:58:42.608+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T20:58:42.686+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS temp_avro_data
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T20:59:24.084+0000] {logging_mixin.py:188} INFO - [[{'c': ['1', '12'], 'p': 193.5888, 's': 'AAPL', 't': 1703278713373, 'v': 1}, {'c': ['1', '8', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278713375, 'v': 60}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278713230, 'v': 0.00833}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278713245, 'v': 0.00062}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278713247, 'v': 0.00724}, {'c': None, 'p': 2314.46, 's': 'BINANCE:ETHUSDT', 't': 1703278713260, 'v': 0.0992}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278713269, 'v': 0.00062}, {'c': ['1'], 'p': 193.58, 's': 'AAPL', 't': 1703278713432, 'v': 3000}, {'c': ['1', '12'], 'p': 193.5702, 's': 'AAPL', 't': 1703278713437, 'v': 15}, {'c': ['1', '12'], 'p': 193.585, 's': 'AAPL', 't': 1703278713473, 'v': 1}], [{'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278713440, 'v': 0.22977}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278713440, 'v': 0.3781}, {'c': ['1', '12'], 'p': 153.415, 's': 'AMZN', 't': 1703278713658, 'v': 13}, {'c': ['1', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278713666, 'v': 5}, {'c': ['1'], 'p': 153.415, 's': 'AMZN', 't': 1703278713668, 'v': 100}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278713683, 'v': 10}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278713701, 'v': 60}, {'c': ['1'], 'p': 193.58, 's': 'AAPL', 't': 1703278713701, 'v': 100}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278713702, 'v': 11}, {'c': ['1'], 'p': 193.581, 's': 'AAPL', 't': 1703278713702, 'v': 100}], [{'c': ['1', '8', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278713756, 'v': 1}, {'c': ['1', '12'], 'p': 153.415, 's': 'AMZN', 't': 1703278713787, 'v': 1}, {'c': ['1', '12'], 'p': 153.4179, 's': 'AMZN', 't': 1703278713807, 'v': 5}, {'c': ['1', '12'], 'p': 193.5759, 's': 'AAPL', 't': 1703278713810, 'v': 5}, {'c': ['1', '12'], 'p': 193.5799, 's': 'AAPL', 't': 1703278713826, 'v': 1}, {'c': ['1', '12'], 'p': 193.5775, 's': 'AAPL', 't': 1703278713829, 'v': 1}, {'c': ['1', '12'], 'p': 193.5798, 's': 'AAPL', 't': 1703278713829, 'v': 1}, {'c': ['1', '12'], 'p': 193.5788, 's': 'AAPL', 't': 1703278713877, 'v': 1}, {'c': ['1'], 'p': 193.575, 's': 'AAPL', 't': 1703278713879, 'v': 100}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 100}], [{'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 71}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 4}, {'c': ['1', '8'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 100}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 100}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 107}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 126}, {'c': ['1', '8', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 9}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 8}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 74}], [{'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 4}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713911, 'v': 4}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713912, 'v': 7}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 100}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 54}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 73}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 200}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 51}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 100}, {'c': ['1', '12'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 73}], [{'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 100}, {'c': ['1'], 'p': 153.41, 's': 'AMZN', 't': 1703278713928, 'v': 100}, {'c': ['1'], 'p': 153.4162, 's': 'AMZN', 't': 1703278713933, 'v': 500}, {'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278713976, 'v': 5}, {'c': ['1', '12'], 'p': 153.415, 's': 'AMZN', 't': 1703278713979, 'v': 1}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278713833, 'v': 0.00055}, {'c': ['1', '12'], 'p': 153.4199, 's': 'AMZN', 't': 1703278714007, 'v': 3}, {'c': ['1', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278714015, 'v': 12}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278713893, 'v': 0.06573}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278713903, 'v': 0.04091}], [{'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278714089, 'v': 1}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278714046, 'v': 0.00208}, {'c': ['1', '12'], 'p': 193.5788, 's': 'AAPL', 't': 1703278714129, 'v': 1}, {'c': None, 'p': 2314.46, 's': 'BINANCE:ETHUSDT', 't': 1703278713991, 'v': 0.0115}, {'c': ['1', '12'], 'p': 193.5799, 's': 'AAPL', 't': 1703278714255, 'v': 6}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278714308, 'v': 1}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278714308, 'v': 1}], [{'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278714393, 'v': 2}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278714393, 'v': 2}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714426, 'v': 9}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714426, 'v': 9}, {'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278714499, 'v': 1}, {'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278714577, 'v': 50}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 10}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}], [{'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 1}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 300}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 50}, {'c': ['1', '8', '12'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 19}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8'], 'p': 153.42, 's': 'AMZN', 't': 1703278714619, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714620, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714620, 'v': 100}], [{'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714620, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278714620, 'v': 39}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}]]
+[2023-12-22T20:59:24.086+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5888,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713373,
+                                1
+                            )
+                        
+[2023-12-22T20:59:31.448+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713375,
+                                60
+                            )
+                        
+[2023-12-22T20:59:34.248+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713230,
+                                0.00833
+                            )
+                        
+[2023-12-22T20:59:36.916+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713245,
+                                0.00062
+                            )
+                        
+[2023-12-22T20:59:39.416+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713247,
+                                0.00724
+                            )
+                        
+[2023-12-22T20:59:41.701+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.46,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703278713260,
+                                0.0992
+                            )
+                        
+[2023-12-22T20:59:44.019+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713269,
+                                0.00062
+                            )
+                        
+[2023-12-22T20:59:47.089+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713432,
+                                3000
+                            )
+                        
+[2023-12-22T20:59:49.353+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5702,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713437,
+                                15
+                            )
+                        
+[2023-12-22T20:59:51.617+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.585,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713473,
+                                1
+                            )
+                        
+[2023-12-22T20:59:53.808+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713440,
+                                0.22977
+                            )
+                        
+[2023-12-22T20:59:56.043+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713440,
+                                0.3781
+                            )
+                        
+[2023-12-22T20:59:58.266+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713658,
+                                13
+                            )
+                        
+[2023-12-22T21:00:00.525+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.42,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713666,
+                                5
+                            )
+                        
+[2023-12-22T21:00:02.776+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713668,
+                                100
+                            )
+                        
+[2023-12-22T21:00:04.991+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713683,
+                                10
+                            )
+                        
+[2023-12-22T21:00:07.266+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713701,
+                                60
+                            )
+                        
+[2023-12-22T21:00:09.582+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713701,
+                                100
+                            )
+                        
+[2023-12-22T21:00:11.797+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713702,
+                                11
+                            )
+                        
+[2023-12-22T21:00:14.064+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.581,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713702,
+                                100
+                            )
+                        
+[2023-12-22T21:00:16.312+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713756,
+                                1
+                            )
+                        
+[2023-12-22T21:00:18.540+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713787,
+                                1
+                            )
+                        
+[2023-12-22T21:00:20.786+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.4179,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713807,
+                                5
+                            )
+                        
+[2023-12-22T21:00:22.987+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5759,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713810,
+                                5
+                            )
+                        
+[2023-12-22T21:00:25.201+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5799,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713826,
+                                1
+                            )
+                        
+[2023-12-22T21:00:27.433+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5775,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713829,
+                                1
+                            )
+                        
+[2023-12-22T21:00:29.661+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5798,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713829,
+                                1
+                            )
+                        
+[2023-12-22T21:00:31.939+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5788,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713877,
+                                1
+                            )
+                        
+[2023-12-22T21:00:34.141+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.575,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713879,
+                                100
+                            )
+                        
+[2023-12-22T21:00:36.452+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                100
+                            )
+                        
+[2023-12-22T21:00:38.658+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                100
+                            )
+                        
+[2023-12-22T21:00:41.121+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                71
+                            )
+                        
+[2023-12-22T21:00:43.430+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                4
+                            )
+                        
+[2023-12-22T21:00:45.705+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                100
+                            )
+                        
+[2023-12-22T21:00:47.930+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                100
+                            )
+                        
+[2023-12-22T21:00:50.175+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                107
+                            )
+                        
+[2023-12-22T21:00:52.818+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                126
+                            )
+                        
+[2023-12-22T21:00:55.089+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                9
+                            )
+                        
+[2023-12-22T21:00:57.307+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                8
+                            )
+                        
+[2023-12-22T21:00:59.507+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                74
+                            )
+                        
+[2023-12-22T21:01:01.720+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                4
+                            )
+                        
+[2023-12-22T21:01:03.921+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713911,
+                                4
+                            )
+                        
+[2023-12-22T21:01:06.127+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713912,
+                                7
+                            )
+                        
+[2023-12-22T21:01:08.329+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                100
+                            )
+                        
+[2023-12-22T21:01:10.593+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                54
+                            )
+                        
+[2023-12-22T21:01:12.829+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                73
+                            )
+                        
+[2023-12-22T21:01:15.093+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                200
+                            )
+                        
+[2023-12-22T21:01:17.358+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                51
+                            )
+                        
+[2023-12-22T21:01:19.594+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                100
+                            )
+                        
+[2023-12-22T21:01:21.814+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                73
+                            )
+                        
+[2023-12-22T21:01:24.038+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                100
+                            )
+                        
+[2023-12-22T21:01:26.238+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.41,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713928,
+                                100
+                            )
+                        
+[2023-12-22T21:01:28.501+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.4162,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713933,
+                                500
+                            )
+                        
+[2023-12-22T21:01:30.801+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.575,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713976,
+                                5
+                            )
+                        
+[2023-12-22T21:01:33.021+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.415,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278713979,
+                                1
+                            )
+                        
+[2023-12-22T21:01:35.263+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713833,
+                                0.00055
+                            )
+                        
+[2023-12-22T21:01:37.550+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.4199,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714007,
+                                3
+                            )
+                        
+[2023-12-22T21:01:39.795+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.42,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714015,
+                                12
+                            )
+                        
+[2023-12-22T21:01:42.038+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713893,
+                                0.06573
+                            )
+                        
+[2023-12-22T21:01:44.305+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278713903,
+                                0.04091
+                            )
+                        
+[2023-12-22T21:01:46.666+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.58,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714089,
+                                1
+                            )
+                        
+[2023-12-22T21:01:48.986+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43702.03,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703278714046,
+                                0.00208
+                            )
+                        
+[2023-12-22T21:01:51.276+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5788,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714129,
+                                1
+                            )
+                        
+[2023-12-22T21:01:53.560+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.46,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703278713991,
+                                0.0115
+                            )
+                        
+[2023-12-22T21:01:55.827+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                193.5799,
+                                'AAPL',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714255,
+                                6
+                            )
+                        
+[2023-12-22T21:01:58.128+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.36,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714308,
+                                1
+                            )
+                        
+[2023-12-22T21:02:00.421+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.36,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714308,
+                                1
+                            )
+                        
+[2023-12-22T21:02:02.683+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                374.36,
+                                'MSFT',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714393,
+                                2
+                            )
+                        
+[2023-12-22T21:02:04.135+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2023-12-22T21:02:04.139+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 1892. PIDs of all processes in the group: [1892]
+[2023-12-22T21:02:04.140+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 1892
+[2023-12-22T21:02:04.141+0000] {taskinstance.py:2451} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-12-22T21:02:04.142+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: Task received SIGTERM signal
+[2023-12-22T21:02:04.143+0000] {logging_mixin.py:188} INFO - [[{'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 480}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714621, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714622, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714622, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714622, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714622, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714622, 'v': 100}, {'c': ['1'], 'p': 153.42, 's': 'AMZN', 't': 1703278714626, 'v': 100}], [{'c': ['1'], 'p': 193.58, 's': 'AAPL', 't': 1703278714644, 'v': 100}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 1}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 9}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 1}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 15}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 84}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714679, 'v': 10}, {'c': ['1', '8', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278714679, 'v': 2}, {'c': ['1', '8', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278714679, 'v': 1}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278714679, 'v': 12}], [{'c': ['1'], 'p': 153.439, 's': 'AMZN', 't': 1703278714681, 'v': 1303}, {'c': ['1'], 'p': 153.439, 's': 'AMZN', 't': 1703278714681, 'v': 697}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 1}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 9}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 1}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 15}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714677, 'v': 84}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278714679, 'v': 10}, {'c': ['8', '12', '41'], 'p': 374.38, 's': 'MSFT', 't': 1703278714679, 'v': 2}, {'c': ['8', '12', '41'], 'p': 374.38, 's': 'MSFT', 't': 1703278714679, 'v': 1}], [{'c': ['12'], 'p': 374.39, 's': 'MSFT', 't': 1703278714679, 'v': 12}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278714750, 'v': 148}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278714625, 'v': 0.07865}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278714625, 'v': 0.4573}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278714625, 'v': 0.4573}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278714625, 'v': 0.03}, {'c': None, 'p': 43702.02, 's': 'BINANCE:BTCUSDT', 't': 1703278714625, 'v': 0.00055}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278714844, 'v': 10}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278714844, 'v': 113}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278714844, 'v': 100}], [{'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278714776, 'v': 0.00046}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278714946, 'v': 100}, {'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278714951, 'v': 23}, {'c': None, 'p': 2314.46, 's': 'BINANCE:ETHUSDT', 't': 1703278714827, 'v': 0.0961}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278702884, 'v': 14}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278714906, 'v': 0.17589}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278702884, 'v': 1}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715072, 'v': 18}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715072, 'v': 18}, {'c': ['1'], 'p': 193.575, 's': 'AAPL', 't': 1703278715166, 'v': 100}], [{'c': ['1'], 'p': 193.5701, 's': 'AAPL', 't': 1703278715180, 'v': 100}, {'c': ['1'], 'p': 193.5701, 's': 'AAPL', 't': 1703278715181, 'v': 100}, {'c': ['1'], 'p': 193.5748, 's': 'AAPL', 't': 1703278715226, 'v': 155}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 15}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 50}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 50}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 77}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 15}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 50}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 50}], [{'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715241, 'v': 77}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 23}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 23}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 77}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 46}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 30}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 42}, {'c': ['1', '12'], 'p': 153.4201, 's': 'AMZN', 't': 1703278715254, 'v': 20}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 23}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 23}], [{'c': ['1', '12'], 'p': 193.57, 's': 'AAPL', 't': 1703278715344, 'v': 1}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278715360, 'v': 4}, {'c': ['8'], 'p': 153.42, 's': 'AMZN', 't': 1703278703032, 'v': 200}, {'c': ['8'], 'p': 374.37, 's': 'MSFT', 't': 1703278703032, 'v': 100}, {'c': ['8'], 'p': 374.38, 's': 'MSFT', 't': 1703278703032, 'v': 100}], [{'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278715416, 'v': 2}, {'c': ['1', '12'], 'p': 193.575, 's': 'AAPL', 't': 1703278715417, 'v': 4}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715430, 'v': 20}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278703033, 'v': 13}, {'c': ['1'], 'p': 374.375, 's': 'MSFT', 't': 1703278715438, 'v': 136}, {'c': ['1', '8', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715441, 'v': 4}, {'c': ['1'], 'p': 374.3653, 's': 'MSFT', 't': 1703278715471, 'v': 200}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278715475, 'v': 33}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 77}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 46}], [{'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 30}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715248, 'v': 42}, {'c': ['8', '12', '41'], 'p': 374.37, 's': 'MSFT', 't': 1703278715430, 'v': 20}, {'c': [], 'p': 374.375, 's': 'MSFT', 't': 1703278715438, 'v': 136}, {'c': ['8', '12', '41'], 'p': 374.36, 's': 'MSFT', 't': 1703278715441, 'v': 4}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715329, 'v': 0.01217}, {'c': [], 'p': 374.3653, 's': 'MSFT', 't': 1703278715471, 'v': 200}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715342, 'v': 0.00522}, {'c': None, 'p': 2314.46, 's': 'BINANCE:ETHUSDT', 't': 1703278715389, 'v': 0.0042}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278716279, 'v': 1}]]
+[2023-12-22T21:02:04.144+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.43,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278714621,
+                                480
+                            )
+                        
+[2023-12-22T21:02:07.336+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: 'utf-8' codec can't decode byte 0xf9 in position 3: invalid start byte
+[2023-12-22T21:02:07.337+0000] {logging_mixin.py:188} INFO - [[{'c': ['1', '12'], 'p': 153.4288, 's': 'AMZN', 't': 1703278716235, 'v': 1}, {'c': ['1', '12'], 'p': 153.425, 's': 'AMZN', 't': 1703278716267, 'v': 3}, {'c': ['1', '12'], 'p': 153.425, 's': 'AMZN', 't': 1703278716269, 'v': 4}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 96}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 3}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': ['1', '12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 10}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278716331, 'v': 27}], [{'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278716331, 'v': 27}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715453, 'v': 0.00184}, {'c': ['1', '12'], 'p': 193.5701, 's': 'AAPL', 't': 1703278715605, 'v': 23}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 96}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 3}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 5}, {'c': ['12'], 'p': 374.36, 's': 'MSFT', 't': 1703278715597, 'v': 10}, {'c': ['1', '12'], 'p': 193.5799, 's': 'AAPL', 't': 1703278716395, 'v': 6}], [{'c': ['1', '12'], 'p': 153.425, 's': 'AMZN', 't': 1703278715685, 'v': 1}, {'c': ['1', '12'], 'p': 374.365, 's': 'MSFT', 't': 1703278715699, 'v': 1}, {'c': ['12'], 'p': 374.365, 's': 'MSFT', 't': 1703278715699, 'v': 1}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278716442, 'v': 45}, {'c': ['12'], 'p': 374.37, 's': 'MSFT', 't': 1703278716442, 'v': 45}, {'c': ['1', '8', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715728, 'v': 1}, {'c': ['1', '8', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715728, 'v': 10}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715728, 'v': 1}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715728, 'v': 52}, {'c': ['1', '8'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 100}], [{'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 4}, {'c': ['1', '8'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 100}, {'c': ['8', '12', '41'], 'p': 374.38, 's': 'MSFT', 't': 1703278715728, 'v': 1}, {'c': ['8', '12', '41'], 'p': 374.38, 's': 'MSFT', 't': 1703278715728, 'v': 10}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 300}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 300}, {'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 299}], [{'c': ['1', '8'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 44}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 1}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 48}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 48}, {'c': ['1'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 2}, {'c': ['1', '8', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703278715737, 'v': 55}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715728, 'v': 1}], [{'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715728, 'v': 52}, {'c': ['1', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['1', '8', '12'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 14}, {'c': ['1', '8', '12'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 86}, {'c': ['1', '8'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 200}, {'c': ['1', '12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715738, 'v': 3}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715738, 'v': 200}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 5}], [{'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715739, 'v': 110}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 5}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 3}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 14}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715739, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715739, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.4, 's': 'MSFT', 't': 1703278715739, 'v': 5}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 86}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715739, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715739, 'v': 30}], [{'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715740, 'v': 100}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715740, 'v': 38}, {'c': ['1'], 'p': 153.43, 's': 'AMZN', 't': 1703278715740, 'v': 100}, {'c': ['1', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715740, 'v': 14}, {'c': ['1', '12'], 'p': 374.39, 's': 'MSFT', 't': 1703278715740, 'v': 42}, {'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715610, 'v': 0.00017}, {'c': ['8', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 100}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 4}, {'c': ['1', '8', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715752, 'v': 35}, {'c': ['1', '8', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715752, 'v': 11}], [{'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715752, 'v': 100}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715752, 'v': 100}, {'c': ['1', '8', '12'], 'p': 153.43, 's': 'AMZN', 't': 1703278715752, 'v': 50}, {'c': ['1', '8'], 'p': 153.43, 's': 'AMZN', 't': 1703278715753, 'v': 300}, {'c': ['1', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715753, 'v': 18}, {'c': ['1', '8'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 100}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 15}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 50}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 35}, {'c': ['1', '8', '12'], 'p': 374.37, 's': 'MSFT', 't': 1703278715756, 'v': 82}], [{'c': None, 'p': 43702.03, 's': 'BINANCE:BTCUSDT', 't': 1703278715634, 'v': 0.00017}, {'c': ['8', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 100}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 1}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 48}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 48}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715737, 'v': 2}, {'c': ['12'], 'p': 374.38, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.4, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 5}, {'c': ['8', '12', '41'], 'p': 374.39, 's': 'MSFT', 't': 1703278715738, 'v': 14}]]
+[2023-12-22T21:02:07.337+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                153.4288,
+                                'AMZN',  -- New 'exchange' attribute
+                                'None',  -- New 'crypto_pair' attribute
+                                1703278716235,
+                                1
+                            )
+                        
+[2023-12-22T21:03:04.150+0000] {process_utils.py:149} WARNING - process psutil.Process(pid=1892, name='airflow task runner: batch_layer consume_data manual__2023-12-22T20:58:39.100301+00:00 44', status='sleeping', started='20:58:41') did not respond to SIGTERM. Trying SIGKILL
+[2023-12-22T21:03:04.152+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGKILL to group 1892
+[2023-12-22T21:03:04.160+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1892, name='airflow task runner: batch_layer consume_data manual__2023-12-22T20:58:39.100301+00:00 44', status='terminated', exitcode=<Negsignal.SIGKILL: -9>, started='20:58:41') (1892) terminated with exit code Negsignal.SIGKILL
+[2023-12-22T21:03:04.160+0000] {standard_task_runner.py:175} ERROR - Job 44 was killed before it finished (likely due to running out of memory)

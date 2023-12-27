@@ -1,0 +1,53 @@
+[2023-12-26T17:18:17.821+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_2 manual__2023-12-26T17:05:39.661689+00:00 [queued]>
+[2023-12-26T17:18:17.827+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_2 manual__2023-12-26T17:05:39.661689+00:00 [queued]>
+[2023-12-26T17:18:17.828+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-26T17:18:17.840+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_2> on 2023-12-26 17:05:39.661689+00:00
+[2023-12-26T17:18:17.846+0000] {standard_task_runner.py:60} INFO - Started process 868 to run task
+[2023-12-26T17:18:17.848+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_2', 'manual__2023-12-26T17:05:39.661689+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmphyv5lpyp']
+[2023-12-26T17:18:17.850+0000] {standard_task_runner.py:88} INFO - Job 23: Subtask batch_2
+[2023-12-26T17:18:17.884+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_2 manual__2023-12-26T17:05:39.661689+00:00 [running]> on host ba237c0dfd1a
+[2023-12-26T17:18:17.930+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_2' AIRFLOW_CTX_EXECUTION_DATE='2023-12-26T17:05:39.661689+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-26T17:05:39.661689+00:00'
+[2023-12-26T17:18:17.989+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T17:18:18.055+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T17:18:18.968+0000] {logging_mixin.py:188} INFO -          date exchange  max_price  min_price
+0  2023-12-25  BINANCE   43694.01  2268.2400
+1  2023-12-26     AAPL     193.80   193.0715
+2  2023-12-26     AMZN     153.90   153.4050
+3  2023-12-26  BINANCE   42749.48  2224.0500
+4  2023-12-26     MSFT     375.53   374.4800
+[2023-12-26T17:18:18.972+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_2.parquet' created successfully.
+[2023-12-26T17:18:18.973+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3653, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 't'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 30, in batch_2
+    b2.batch_proc_2()
+  File "/opt/airflow/dags/batch_proc_2.py", line 69, in batch_proc_2
+    result['t'] = result['t'].dt.floor('us')
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3655, in get_loc
+    raise KeyError(key) from err
+KeyError: 't'
+[2023-12-26T17:18:18.984+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=batch_2, execution_date=20231226T170539, start_date=20231226T171817, end_date=20231226T171818
+[2023-12-26T17:18:18.993+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 23 for task batch_2 ('t'; 868)
+[2023-12-26T17:18:19.025+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-26T17:18:19.033+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

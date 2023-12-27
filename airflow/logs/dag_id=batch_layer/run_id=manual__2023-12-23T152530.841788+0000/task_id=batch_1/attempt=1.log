@@ -1,0 +1,31 @@
+[2023-12-23T15:32:09.773+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T15:25:30.841788+00:00 [queued]>
+[2023-12-23T15:32:09.780+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T15:25:30.841788+00:00 [queued]>
+[2023-12-23T15:32:09.780+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T15:32:09.794+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 15:25:30.841788+00:00
+[2023-12-23T15:32:09.800+0000] {standard_task_runner.py:60} INFO - Started process 3773 to run task
+[2023-12-23T15:32:09.803+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'manual__2023-12-23T15:25:30.841788+00:00', '--job-id', '43', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmprgvsj7tz']
+[2023-12-23T15:32:09.804+0000] {standard_task_runner.py:88} INFO - Job 43: Subtask batch_1
+[2023-12-23T15:32:09.834+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 manual__2023-12-23T15:25:30.841788+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T15:32:09.888+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T15:25:30.841788+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T15:25:30.841788+00:00'
+[2023-12-23T15:32:09.942+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T15:32:09.992+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T15:32:12.503+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 34, in batch_proc_1
+    result_dict = {'p': row[0], 'exchange': row[1], 'crypto_pair': row[2].apply(filter_non_string), 't': str(datetime.fromtimestamp(round(row[3]/1000.0))), 'v': row[4]}
+AttributeError: 'str' object has no attribute 'apply'
+[2023-12-23T15:32:12.515+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T152530, start_date=20231223T153209, end_date=20231223T153212
+[2023-12-23T15:32:12.527+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 43 for task batch_1 ('str' object has no attribute 'apply'; 3773)
+[2023-12-23T15:32:12.545+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T15:32:12.556+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,555 @@
+[2023-12-22T22:52:31.715+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T22:49:07.433998+00:00 [queued]>
+[2023-12-22T22:52:31.720+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-22T22:49:07.433998+00:00 [queued]>
+[2023-12-22T22:52:31.721+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-22T22:52:31.735+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-22 22:49:07.433998+00:00
+[2023-12-22T22:52:31.740+0000] {standard_task_runner.py:60} INFO - Started process 1115 to run task
+[2023-12-22T22:52:31.745+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'manual__2023-12-22T22:49:07.433998+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpar4lxbt6']
+[2023-12-22T22:52:31.750+0000] {standard_task_runner.py:88} INFO - Job 23: Subtask consume_data
+[2023-12-22T22:52:31.791+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data manual__2023-12-22T22:49:07.433998+00:00 [running]> on host f9bc372cbc19
+[2023-12-22T22:52:31.845+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-22T22:49:07.433998+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-22T22:49:07.433998+00:00'
+[2023-12-22T22:52:31.901+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T22:52:31.934+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS finnhub_table
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T22:52:31.998+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-22T22:52:32.030+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS temp_avro_data
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-22T22:52:32.042+0000] {logging_mixin.py:188} INFO - [[{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282235844, 'v': 0.524}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282235867, 'v': 0.00229}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282235902, 'v': 0.01}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236041, 'v': 0.35}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282236056, 'v': 0.00082}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282236191, 'v': 1}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236245, 'v': 0.2301}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236245, 'v': 0.2519}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236480, 'v': 0.558}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282236652, 'v': 0.02065}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236657, 'v': 0.503}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282236666, 'v': 0.00555}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282236667, 'v': 0.00015}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282236839, 'v': 0.5}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237047, 'v': 0.01}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237047, 'v': 0.414}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237234, 'v': 0.336}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237449, 'v': 0.5065}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237449, 'v': 0.0035}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237648, 'v': 0.387}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282237732, 'v': 0.0072}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282237843, 'v': 0.51}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238047, 'v': 0.326}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282238173, 'v': 0.00016}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238245, 'v': 0.491}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282238262, 'v': 0.00043}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238447, 'v': 0.101}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238447, 'v': 0.373}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238644, 'v': 0.522}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282238762, 'v': 0.001}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282238834, 'v': 0.392}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239080, 'v': 0.384}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282239082, 'v': 0.03185}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282239105, 'v': 0.00103}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239271, 'v': 0.413}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239448, 'v': 0.003}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239448, 'v': 0.449}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239654, 'v': 0.445}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239851, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282239851, 'v': 0.2781}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282239913, 'v': 0.7828}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240051, 'v': 0.459}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240249, 'v': 0.346}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282240333, 'v': 0.00629}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282240357, 'v': 0.01647}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282240432, 'v': 0.02657}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240450, 'v': 0.451}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282240509, 'v': 0.00229}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282240573, 'v': 0.01279}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240649, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240649, 'v': 0.1401}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282240845, 'v': 0.538}], [{'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282240865, 'v': 0.0013}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241065, 'v': 0.478}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241258, 'v': 0.52}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241451, 'v': 0.331}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241655, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241655, 'v': 0.1711}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282241845, 'v': 0.338}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242044, 'v': 0.503}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282242061, 'v': 0.00137}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242124, 'v': 0.0024}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242253, 'v': 0.404}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242390, 'v': 1.8561}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242451, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242451, 'v': 0.2101}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242652, 'v': 0.339}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282242845, 'v': 0.533}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282243029, 'v': 0.00553}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243053, 'v': 0.307}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282243172, 'v': 0.00021}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243249, 'v': 0.336}], [{'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282243252, 'v': 0.00023}]]
+[2023-12-22T22:52:32.043+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282235844,
+                                0.524
+                            )
+                        
+[2023-12-22T22:52:34.055+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282235867,
+                                0.00229
+                            )
+                        
+[2023-12-22T22:52:35.925+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282235902,
+                                0.01
+                            )
+                        
+[2023-12-22T22:52:38.793+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236041,
+                                0.35
+                            )
+                        
+[2023-12-22T22:52:40.689+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282236056,
+                                0.00082
+                            )
+                        
+[2023-12-22T22:52:43.059+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282236191,
+                                1
+                            )
+                        
+[2023-12-22T22:52:44.933+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236245,
+                                0.2301
+                            )
+                        
+[2023-12-22T22:52:46.814+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236245,
+                                0.2519
+                            )
+                        
+[2023-12-22T22:52:49.125+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236480,
+                                0.558
+                            )
+                        
+[2023-12-22T22:52:51.427+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.24,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282236652,
+                                0.02065
+                            )
+                        
+[2023-12-22T22:52:53.324+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236657,
+                                0.503
+                            )
+                        
+[2023-12-22T22:52:55.185+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282236666,
+                                0.00555
+                            )
+                        
+[2023-12-22T22:52:57.205+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282236667,
+                                0.00015
+                            )
+                        
+[2023-12-22T22:52:59.507+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282236839,
+                                0.5
+                            )
+                        
+[2023-12-22T22:53:01.438+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237047,
+                                0.01
+                            )
+                        
+[2023-12-22T22:53:03.694+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237047,
+                                0.414
+                            )
+                        
+[2023-12-22T22:53:05.609+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237234,
+                                0.336
+                            )
+                        
+[2023-12-22T22:53:07.538+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237449,
+                                0.5065
+                            )
+                        
+[2023-12-22T22:53:09.447+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237449,
+                                0.0035
+                            )
+                        
+[2023-12-22T22:53:11.378+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237648,
+                                0.387
+                            )
+                        
+[2023-12-22T22:53:13.263+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.01,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237732,
+                                0.0072
+                            )
+                        
+[2023-12-22T22:53:15.183+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282237843,
+                                0.51
+                            )
+                        
+[2023-12-22T22:53:17.094+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238047,
+                                0.326
+                            )
+                        
+[2023-12-22T22:53:19.372+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282238173,
+                                0.00016
+                            )
+                        
+[2023-12-22T22:53:21.259+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238245,
+                                0.491
+                            )
+                        
+[2023-12-22T22:53:23.157+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.24,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282238262,
+                                0.00043
+                            )
+                        
+[2023-12-22T22:53:25.069+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238447,
+                                0.101
+                            )
+                        
+[2023-12-22T22:53:27.376+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238447,
+                                0.373
+                            )
+                        
+[2023-12-22T22:53:29.273+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238644,
+                                0.522
+                            )
+                        
+[2023-12-22T22:53:31.596+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282238762,
+                                0.001
+                            )
+                        
+[2023-12-22T22:53:33.887+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282238834,
+                                0.392
+                            )
+                        
+[2023-12-22T22:53:35.783+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239080,
+                                0.384
+                            )
+                        
+[2023-12-22T22:53:37.716+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.24,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282239082,
+                                0.03185
+                            )
+                        
+[2023-12-22T22:53:39.771+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.24,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282239105,
+                                0.00103
+                            )
+                        
+[2023-12-22T22:53:41.650+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239271,
+                                0.413
+                            )
+                        
+[2023-12-22T22:53:43.534+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239448,
+                                0.003
+                            )
+                        
+[2023-12-22T22:53:45.415+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239448,
+                                0.449
+                            )
+                        
+[2023-12-22T22:53:47.306+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239654,
+                                0.445
+                            )
+                        
+[2023-12-22T22:53:49.204+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239851,
+                                0.2159
+                            )
+                        
+[2023-12-22T22:53:51.475+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239851,
+                                0.2781
+                            )
+                        
+[2023-12-22T22:53:53.349+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.01,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282239913,
+                                0.7828
+                            )
+                        
+[2023-12-22T22:53:55.233+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282240051,
+                                0.459
+                            )
+                        
+[2023-12-22T22:53:57.507+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282240249,
+                                0.346
+                            )
+                        
+[2023-12-22T22:53:59.383+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282240333,
+                                0.00629
+                            )
+                        
+[2023-12-22T22:54:01.665+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                43706.25,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'BTCUSDT',  -- New 'crypto_pair' attribute
+                                1703282240357,
+                                0.01647
+                            )
+                        
+[2023-12-22T22:54:03.426+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to success. Terminating instance.
+[2023-12-22T22:54:03.428+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 1115. PIDs of all processes in the group: [1115]
+[2023-12-22T22:54:03.429+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 1115
+[2023-12-22T22:54:03.429+0000] {taskinstance.py:2451} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-12-22T22:54:03.430+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: Task received SIGTERM signal
+[2023-12-22T22:54:03.430+0000] {logging_mixin.py:188} INFO - [[{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243297, 'v': 3.2}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243297, 'v': 0.4332}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243452, 'v': 0.459}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282243628, 'v': 0.04043}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282243628, 'v': 0.11474}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282243628, 'v': 0.07419}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243662, 'v': 0.56}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282243752, 'v': 0.4535}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282243754, 'v': 0.024}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282243851, 'v': 0.426}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244050, 'v': 0.529}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244255, 'v': 0.429}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244307, 'v': 0.0066}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245250, 'v': 0.464}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244447, 'v': 0.408}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244648, 'v': 0.302}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244769, 'v': 0.0161}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282244853, 'v': 0.474}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282244876, 'v': 0.00027}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245053, 'v': 0.0151}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245053, 'v': 0.3029}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282245305, 'v': 0.00063}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245453, 'v': 0.449}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245635, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245635, 'v': 0.2381}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282245885, 'v': 0.325}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246259, 'v': 0.387}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246049, 'v': 0.439}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282246157, 'v': 0.0011}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282246331, 'v': 0.00453}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246454, 'v': 0.519}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282246463, 'v': 0.0009}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246655, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246655, 'v': 0.2861}, {'c': ['1', '24'], 'p': 153.2401, 's': 'AMZN', 't': 1703282246925, 'v': 200}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282246854, 'v': 0.514}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247091, 'v': 0.506}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247119, 'v': 0.0216}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247254, 'v': 0.509}], [{'c': ['1', '24', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703282247546, 'v': 70}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247454, 'v': 0.445}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248263, 'v': 0.554}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247662, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247662, 'v': 0.2981}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282247857, 'v': 0.364}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248054, 'v': 0.463}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282248352, 'v': 0.00329}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248457, 'v': 0.517}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248657, 'v': 0.2159}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248657, 'v': 0.2711}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248674, 'v': 0.0047}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282248865, 'v': 0.447}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282249057, 'v': 0.33}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282249253, 'v': 0.33}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282249479, 'v': 0.546}, {'c': ['1', '8', '24', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703282249683, 'v': 1}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282249649, 'v': 0.0115}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282249657, 'v': 0.482}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282249774, 'v': 0.00355}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282249861, 'v': 0.55}, {'c': ['1', '24', '12'], 'p': 374.83, 's': 'MSFT', 't': 1703282250040, 'v': 2}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282250064, 'v': 0.522}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282250199, 'v': 0.0057}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282250199, 'v': 0.04861}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282250253, 'v': 0.343}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282250460, 'v': 0.435}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282250648, 'v': 0.00074}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282250658, 'v': 0.344}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282250857, 'v': 0.551}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282250905, 'v': 0.0003}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282250967, 'v': 0.0103}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251058, 'v': 0.044}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251058, 'v': 0.51}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251077, 'v': 2.0004}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282251112, 'v': 0.0869}]]
+[2023-12-22T22:54:03.431+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.02,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282243297,
+                                3.2
+                            )
+                        
+[2023-12-22T22:54:05.393+0000] {logging_mixin.py:188} INFO - Error processing and inserting into Hive: 'utf-8' codec can't decode byte 0xff in position 1: invalid start byte
+[2023-12-22T22:54:05.393+0000] {logging_mixin.py:188} INFO - [[{'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282251122, 'v': 0.05}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282251262, 'v': 0.00219}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251273, 'v': 0.103}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251273, 'v': 0.088}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251273, 'v': 0.168}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251460, 'v': 0.0479}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251460, 'v': 0.3471}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282251630, 'v': 0.0059}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251663, 'v': 0.0048}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251663, 'v': 0.0048}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251663, 'v': 0.3404}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282251860, 'v': 0.553}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282251905, 'v': 0.01471}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282251905, 'v': 0.02121}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282252061, 'v': 0.401}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282252290, 'v': 0.459}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282252457, 'v': 0.53}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282252661, 'v': 0.493}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282253290, 'v': 0.0095}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282252863, 'v': 0.546}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253069, 'v': 0.325}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253261, 'v': 0.461}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253461, 'v': 0.0953}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253461, 'v': 0.3177}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253680, 'v': 0.31}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282253870, 'v': 0.541}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254061, 'v': 0.422}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254253, 'v': 0.45}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254293, 'v': 0.1549}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254461, 'v': 0.39}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254669, 'v': 0.421}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254708, 'v': 0.0024}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282254858, 'v': 0.501}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255063, 'v': 0.474}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255263, 'v': 0.003}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255264, 'v': 0.385}], [{'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255471, 'v': 0.479}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255531, 'v': 0.0432}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255669, 'v': 0.348}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282255827, 'v': 0.00155}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255838, 'v': 0.0293}, {'c': None, 'p': 2314.02, 's': 'BINANCE:ETHUSDT', 't': 1703282255839, 'v': 0.0022}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282255842, 'v': 0.0078}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282255842, 'v': 0.0105}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282255842, 'v': 0.0187}, {'c': None, 'p': 2314.01, 's': 'BINANCE:ETHUSDT', 't': 1703282255842, 'v': 0.0359}], [{'c': None, 'p': 2313.99, 's': 'BINANCE:ETHUSDT', 't': 1703282255842, 'v': 0.143}, {'c': None, 'p': 2313.98, 's': 'BINANCE:ETHUSDT', 't': 1703282255856, 'v': 0.0066}, {'c': None, 'p': 2313.97, 's': 'BINANCE:ETHUSDT', 't': 1703282255866, 'v': 0.56}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282255894, 'v': 0.00959}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282255894, 'v': 0.00803}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282255896, 'v': 0.00298}, {'c': None, 'p': 2313.96, 's': 'BINANCE:ETHUSDT', 't': 1703282255896, 'v': 0.0023}, {'c': None, 'p': 2313.94, 's': 'BINANCE:ETHUSDT', 't': 1703282255896, 'v': 0.1493}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282255900, 'v': 0.00298}, {'c': None, 'p': 43706.25, 's': 'BINANCE:BTCUSDT', 't': 1703282255901, 'v': 0.00505}], [{'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256078, 'v': 0.443}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256259, 'v': 0.499}, {'c': None, 'p': 2313.94, 's': 'BINANCE:ETHUSDT', 't': 1703282256353, 'v': 0.0105}], [{'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256371, 'v': 0.062}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282256407, 'v': 0.03567}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282256407, 'v': 0.00034}, {'c': None, 'p': 43706.24, 's': 'BINANCE:BTCUSDT', 't': 1703282256407, 'v': 0.02715}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256466, 'v': 0.382}, {'c': ['1', '24', '12'], 'p': 193.58, 's': 'AAPL', 't': 1703282256704, 'v': 3}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256673, 'v': 0.33}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282256869, 'v': 0.398}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282257063, 'v': 0.398}, {'c': None, 'p': 2313.95, 's': 'BINANCE:ETHUSDT', 't': 1703282257270, 'v': 0.422}]]
+[2023-12-22T22:54:05.394+0000] {hive.py:475} INFO - 
+                            INSERT INTO temp_avro_data
+                            VALUES (
+
+                                2314.01,
+                                'BINANCE',  -- New 'exchange' attribute
+                                'ETHUSDT',  -- New 'crypto_pair' attribute
+                                1703282251122,
+                                0.05
+                            )
+                        
+[2023-12-22T22:55:03.441+0000] {process_utils.py:149} WARNING - process psutil.Process(pid=1115, name='airflow task runner: batch_layer consume_data manual__2023-12-22T22:49:07.433998+00:00 23', status='sleeping', started='22:52:30') did not respond to SIGTERM. Trying SIGKILL
+[2023-12-22T22:55:03.442+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGKILL to group 1115
+[2023-12-22T22:55:03.450+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1115, name='airflow task runner: batch_layer consume_data manual__2023-12-22T22:49:07.433998+00:00 23', status='terminated', exitcode=<Negsignal.SIGKILL: -9>, started='22:52:30') (1115) terminated with exit code Negsignal.SIGKILL
+[2023-12-22T22:55:03.450+0000] {standard_task_runner.py:175} ERROR - Job 23 was killed before it finished (likely due to running out of memory)

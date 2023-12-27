@@ -1,0 +1,112 @@
+[2023-12-23T15:12:05.457+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:59:27.701541+00:00 [queued]>
+[2023-12-23T15:12:05.461+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:59:27.701541+00:00 [queued]>
+[2023-12-23T15:12:05.462+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-23T15:12:05.474+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 14:59:27.701541+00:00
+[2023-12-23T15:12:05.478+0000] {standard_task_runner.py:60} INFO - Started process 3515 to run task
+[2023-12-23T15:12:05.480+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'manual__2023-12-23T14:59:27.701541+00:00', '--job-id', '40', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpu5e3bo8w']
+[2023-12-23T15:12:05.483+0000] {standard_task_runner.py:88} INFO - Job 40: Subtask batch_1
+[2023-12-23T15:12:05.509+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 manual__2023-12-23T14:59:27.701541+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T15:12:05.551+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T14:59:27.701541+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T14:59:27.701541+00:00'
+[2023-12-23T15:12:05.598+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T15:12:05.631+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T15:12:07.573+0000] {logging_mixin.py:188} INFO -                p exchange crypto_pair                    t          v
+0      41981.100  BINANCE     BTCUSDT  2023-12-17 21:24:19    0.00050
+1      41981.100  BINANCE     BTCUSDT  2023-12-17 21:24:19    0.00119
+2      41981.110  BINANCE     BTCUSDT  2023-12-17 21:24:31    0.00684
+3      41977.980  BINANCE     BTCUSDT  2023-12-17 21:25:00    0.00243
+4      41977.990  BINANCE     BTCUSDT  2023-12-17 21:25:00    0.00238
+...          ...      ...         ...                  ...        ...
+61497    197.050     AAPL        None  2023-12-20 19:34:48  100.00000
+61498    197.045     AAPL        None  2023-12-20 19:34:48   28.00000
+61499    197.050     AAPL        None  2023-12-20 19:34:48   72.00000
+61500    197.045     AAPL        None  2023-12-20 19:34:48   29.00000
+61501    197.040     AAPL        None  2023-12-20 19:34:48  100.00000
+
+[61502 rows x 5 columns]
+[2023-12-23T15:12:07.626+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1490, in array_func
+    result = self.grouper._cython_operation(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 959, in _cython_operation
+    return cy_op.cython_operation(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 657, in cython_operation
+    return self._cython_op_ndim_compat(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 497, in _cython_op_ndim_compat
+    return self._call_cython_op(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 541, in _call_cython_op
+    func = self._get_cython_function(self.kind, self.how, values.dtype, is_numeric)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 173, in _get_cython_function
+    raise NotImplementedError(
+NotImplementedError: function is not implemented for this dtype: [how->mean,dtype->object]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 1692, in _ensure_numeric
+    x = float(x)
+ValueError: could not convert string to float: 'IC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETS'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 1696, in _ensure_numeric
+    x = complex(x)
+ValueError: complex() arg is a malformed string
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 39, in batch_proc_1
+    grouped_data = df_filtered.groupby(['crypto_pair', 'v']).mean()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1855, in mean
+    result = self._cython_agg_general(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1507, in _cython_agg_general
+    new_mgr = data.grouped_reduce(array_func)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py", line 1503, in grouped_reduce
+    applied = sb.apply(func)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/blocks.py", line 329, in apply
+    result = func(self.values, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1503, in array_func
+    result = self._agg_py_fallback(values, ndim=data.ndim, alt=alt)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1457, in _agg_py_fallback
+    res_values = self.grouper.agg_series(ser, alt, preserve_dtype=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 994, in agg_series
+    result = self._aggregate_series_pure_python(obj, func)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/ops.py", line 1015, in _aggregate_series_pure_python
+    res = func(group)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/groupby/groupby.py", line 1857, in <lambda>
+    alt=lambda x: Series(x).mean(numeric_only=numeric_only),
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 11556, in mean
+    return NDFrame.mean(self, axis, skipna, numeric_only, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 11201, in mean
+    return self._stat_function(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 11158, in _stat_function
+    return self._reduce(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/series.py", line 4670, in _reduce
+    return op(delegate, skipna=skipna, **kwds)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 96, in _f
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 158, in f
+    result = alt(values, axis=axis, skipna=skipna, **kwds)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 421, in new_func
+    result = func(values, axis=axis, skipna=skipna, mask=mask, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 727, in nanmean
+    the_sum = _ensure_numeric(values.sum(axis, dtype=dtype_sum))
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/nanops.py", line 1699, in _ensure_numeric
+    raise TypeError(f"Could not convert {x} to numeric") from err
+TypeError: Could not convert IC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETS to numeric
+[2023-12-23T15:12:07.638+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T145927, start_date=20231223T151205, end_date=20231223T151207
+[2023-12-23T15:12:07.650+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 40 for task batch_1 (Could not convert IC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETSIC MARKETS to numeric; 3515)
+[2023-12-23T15:12:07.661+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T15:12:07.669+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,1 @@
+[2023-12-22T22:31:18.790+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: batch_layer.income_statement manual__2023-12-22T22:31:11.409265+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

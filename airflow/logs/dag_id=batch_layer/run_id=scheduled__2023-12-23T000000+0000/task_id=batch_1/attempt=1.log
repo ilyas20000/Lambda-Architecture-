@@ -1,0 +1,205 @@
+[2023-12-24T15:47:03.094+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:47:03.100+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:47:03.101+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T15:47:03.119+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T15:47:03.127+0000] {standard_task_runner.py:60} INFO - Started process 325 to run task
+[2023-12-24T15:47:03.131+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpgqf_hu88']
+[2023-12-24T15:47:03.134+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-24T15:47:03.176+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host 83b53490fe78
+[2023-12-24T15:47:03.231+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T15:47:03.329+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T15:47:03.392+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T15:47:13.213+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-24T15:47:13.241+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-24T15:47:13.244+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-24T15:47:13.298+0000] {logging_mixin.py:188} INFO -                         p                          t           v
+crypto_pair                                                     
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156    0.347863
+None           189.781162 2023-12-21 03:33:31.870769  119.831923
+[2023-12-24T15:47:13.311+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-24T15:47:13.317+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T154703, end_date=20231224T154713
+[2023-12-24T15:47:13.342+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-24T15:47:13.351+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T15:56:31.838+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:56:31.842+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T15:56:31.843+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T15:56:31.853+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T15:56:31.858+0000] {standard_task_runner.py:60} INFO - Started process 324 to run task
+[2023-12-24T15:56:31.861+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp6mbioddm']
+[2023-12-24T15:56:31.863+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-24T15:56:31.890+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host be1f0ffa1f05
+[2023-12-24T15:56:31.927+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T15:56:31.995+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T15:56:32.037+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T15:56:39.444+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-24T15:56:39.462+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-24T15:56:39.463+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-24T15:56:39.490+0000] {logging_mixin.py:188} INFO -                         p                          t           v
+crypto_pair                                                     
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156    0.347863
+None           189.781162 2023-12-21 03:33:31.870769  119.831923
+[2023-12-24T15:56:39.500+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-24T15:56:39.505+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T155631, end_date=20231224T155639
+[2023-12-24T15:56:39.527+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-24T15:56:39.534+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T17:08:16.684+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:08:16.689+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T17:08:16.689+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T17:08:16.700+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T17:08:16.704+0000] {standard_task_runner.py:60} INFO - Started process 324 to run task
+[2023-12-24T17:08:16.707+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp06x8i7h3']
+[2023-12-24T17:08:16.708+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-24T17:08:16.735+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host 1e3b18e1227a
+[2023-12-24T17:08:16.776+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T17:08:16.850+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T17:08:16.889+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T17:08:24.614+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-24T17:08:24.636+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-24T17:08:24.637+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-24T17:08:24.670+0000] {logging_mixin.py:188} INFO -                         p                          t           v
+crypto_pair                                                     
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156    0.347863
+None           189.781162 2023-12-21 03:33:31.870769  119.831923
+[2023-12-24T17:08:24.681+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-24T17:08:24.685+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T170816, end_date=20231224T170824
+[2023-12-24T17:08:24.739+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-24T17:08:24.746+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T18:16:26.284+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:16:26.290+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:16:26.290+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T18:16:26.301+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T18:16:26.306+0000] {standard_task_runner.py:60} INFO - Started process 317 to run task
+[2023-12-24T18:16:26.308+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpzx38f9og']
+[2023-12-24T18:16:26.310+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-24T18:16:26.335+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host c0475b589502
+[2023-12-24T18:16:26.372+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T18:16:26.432+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T18:16:26.478+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T18:16:26.572+0000] {logging_mixin.py:188} INFO - Empty DataFrame
+Columns: []
+Index: []
+[2023-12-24T18:16:26.573+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 50, in batch_proc_1
+    df_filtered = df[df['crypto_pair'].notna()]
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: 'crypto_pair'
+[2023-12-24T18:16:26.582+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T181626, end_date=20231224T181626
+[2023-12-24T18:16:26.592+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 9 for task batch_1 ('crypto_pair'; 317)
+[2023-12-24T18:16:26.601+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T18:16:26.609+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-12-24T19:11:13.017+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:11:13.023+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T19:11:13.023+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-24T19:11:13.034+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T19:11:13.037+0000] {standard_task_runner.py:60} INFO - Started process 317 to run task
+[2023-12-24T19:11:13.040+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpm4be6ho5']
+[2023-12-24T19:11:13.041+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask batch_1
+[2023-12-24T19:11:13.067+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host 465cb068660d
+[2023-12-24T19:11:13.105+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T19:11:13.165+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T19:11:13.205+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T19:11:13.297+0000] {logging_mixin.py:188} INFO - Empty DataFrame
+Columns: []
+Index: []
+[2023-12-24T19:11:13.297+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 50, in batch_proc_1
+    df_filtered = df[df['crypto_pair'].notna()]
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: 'crypto_pair'
+[2023-12-24T19:11:13.307+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T191113, end_date=20231224T191113
+[2023-12-24T19:11:13.315+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 9 for task batch_1 ('crypto_pair'; 317)
+[2023-12-24T19:11:13.333+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T19:11:13.341+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

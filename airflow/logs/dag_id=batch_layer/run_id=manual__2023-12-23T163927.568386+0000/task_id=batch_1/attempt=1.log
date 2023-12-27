@@ -1,0 +1,57 @@
+[2023-12-23T16:41:13.010+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T16:39:27.568386+00:00 [queued]>
+[2023-12-23T16:41:13.017+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 manual__2023-12-23T16:39:27.568386+00:00 [queued]>
+[2023-12-23T16:41:13.017+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T16:41:13.031+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 16:39:27.568386+00:00
+[2023-12-23T16:41:13.036+0000] {standard_task_runner.py:60} INFO - Started process 5145 to run task
+[2023-12-23T16:41:13.039+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'manual__2023-12-23T16:39:27.568386+00:00', '--job-id', '77', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp_c5wfx_a']
+[2023-12-23T16:41:13.041+0000] {standard_task_runner.py:88} INFO - Job 77: Subtask batch_1
+[2023-12-23T16:41:13.066+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 manual__2023-12-23T16:39:27.568386+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T16:41:13.110+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T16:39:27.568386+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T16:39:27.568386+00:00'
+[2023-12-23T16:41:13.159+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T16:41:13.201+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T16:41:22.787+0000] {logging_mixin.py:188} INFO -                p crypto_pair                       t          v
+0      41981.100     BTCUSDT 2023-12-17 21:24:18.958    0.00050
+1      41981.100     BTCUSDT 2023-12-17 21:24:19.251    0.00119
+2      41981.110     BTCUSDT 2023-12-17 21:24:30.970    0.00684
+3      41977.980     BTCUSDT 2023-12-17 21:25:00.006    0.00243
+4      41977.990     BTCUSDT 2023-12-17 21:25:00.006    0.00238
+...          ...         ...                     ...        ...
+72016    197.050        None 2023-12-20 19:34:47.700  100.00000
+72017    197.045        None 2023-12-20 19:34:47.700   28.00000
+72018    197.050        None 2023-12-20 19:34:47.700   72.00000
+72019    197.045        None 2023-12-20 19:34:47.700   29.00000
+72020    197.040        None 2023-12-20 19:34:47.700  100.00000
+
+[72021 rows x 4 columns]
+[2023-12-23T16:41:22.810+0000] {logging_mixin.py:188} INFO -                         p                             t           v
+crypto_pair                                                        
+BTCUSDT      42743.267135 2023-12-19 21:26:54.981214208    0.014485
+ETHUSDT       2296.828547 2023-12-22 20:53:39.845156864    0.347863
+None           189.781162 2023-12-21 03:33:31.870769408  119.831923
+[2023-12-23T16:41:22.812+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_1.parquet' already exists.
+[2023-12-23T16:41:22.832+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 75, in batch_proc_1
+    pq.write_table(table, parquet_file_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyarrow/parquet/core.py", line 3093, in write_table
+    writer.write_table(table, row_group_size=row_group_size)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pyarrow/parquet/core.py", line 1079, in write_table
+    self.writer.write_table(table, row_group_size=row_group_size)
+  File "pyarrow/_parquet.pyx", line 1776, in pyarrow._parquet.ParquetWriter.write_table
+  File "pyarrow/error.pxi", line 100, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: Casting from timestamp[ns] to timestamp[us] would lose data: 1703021214981214208
+[2023-12-23T16:41:22.847+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T163927, start_date=20231223T164113, end_date=20231223T164122
+[2023-12-23T16:41:22.869+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 77 for task batch_1 (Casting from timestamp[ns] to timestamp[us] would lose data: 1703021214981214208; 5145)
+[2023-12-23T16:41:22.881+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T16:41:22.889+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

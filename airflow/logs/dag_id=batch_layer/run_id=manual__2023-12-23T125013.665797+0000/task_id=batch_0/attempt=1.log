@@ -1,0 +1,41 @@
+[2023-12-23T12:54:44.127+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:50:13.665797+00:00 [queued]>
+[2023-12-23T12:54:44.133+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:50:13.665797+00:00 [queued]>
+[2023-12-23T12:54:44.134+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T12:54:44.146+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_0> on 2023-12-23 12:50:13.665797+00:00
+[2023-12-23T12:54:44.151+0000] {standard_task_runner.py:60} INFO - Started process 1611 to run task
+[2023-12-23T12:54:44.154+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_0', 'manual__2023-12-23T12:50:13.665797+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpluawzuan']
+[2023-12-23T12:54:44.155+0000] {standard_task_runner.py:88} INFO - Job 23: Subtask batch_0
+[2023-12-23T12:54:44.182+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_0 manual__2023-12-23T12:50:13.665797+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T12:54:44.228+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_0' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T12:50:13.665797+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T12:50:13.665797+00:00'
+[2023-12-23T12:54:44.275+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T12:54:44.311+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-23T12:54:46.021+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 21, in batch_0
+    b0.batch_proc_0()
+  File "/opt/airflow/dags/batch_proc_0.py", line 65, in batch_proc_0
+    transformed_data = transform_data(result.copy())
+  File "/opt/airflow/dags/batch_proc_0.py", line 10, in transform_data
+    df.set_index(df.columns[df.columns.str.endswith('t')].tolist(), inplace=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 5915, in set_index
+    index = ensure_index_from_sequences(arrays, names)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 7069, in ensure_index_from_sequences
+    return MultiIndex.from_arrays(sequences, names=names)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/multi.py", line 510, in from_arrays
+    return cls(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/multi.py", line 333, in __new__
+    raise ValueError("Must pass non-zero number of levels/codes")
+ValueError: Must pass non-zero number of levels/codes
+[2023-12-23T12:54:46.036+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=batch_layer, task_id=batch_0, execution_date=20231223T125013, start_date=20231223T125444, end_date=20231223T125446
+[2023-12-23T12:54:46.045+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 23 for task batch_0 (Must pass non-zero number of levels/codes; 1611)
+[2023-12-23T12:54:46.053+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-23T12:54:46.063+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

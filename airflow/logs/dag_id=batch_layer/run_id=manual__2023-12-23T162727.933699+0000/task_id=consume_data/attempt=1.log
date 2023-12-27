@@ -1,0 +1,32 @@
+[2023-12-23T16:27:30.242+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-23T16:27:27.933699+00:00 [queued]>
+[2023-12-23T16:27:30.247+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.consume_data manual__2023-12-23T16:27:27.933699+00:00 [queued]>
+[2023-12-23T16:27:30.247+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-23T16:27:30.259+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): consume_data> on 2023-12-23 16:27:27.933699+00:00
+[2023-12-23T16:27:30.263+0000] {standard_task_runner.py:60} INFO - Started process 4807 to run task
+[2023-12-23T16:27:30.265+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'consume_data', 'manual__2023-12-23T16:27:27.933699+00:00', '--job-id', '68', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpnywns9u4']
+[2023-12-23T16:27:30.267+0000] {standard_task_runner.py:88} INFO - Job 68: Subtask consume_data
+[2023-12-23T16:27:30.294+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.consume_data manual__2023-12-23T16:27:27.933699+00:00 [running]> on host 7de9f6b6c8f6
+[2023-12-23T16:27:30.341+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='consume_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T16:27:27.933699+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-23T16:27:27.933699+00:00'
+[2023-12-23T16:27:30.385+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T16:27:30.420+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS finnhub_table
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-23T16:27:30.468+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-23T16:27:30.502+0000] {hive.py:475} INFO - 
+        CREATE TABLE IF NOT EXISTS temp_avro_data
+        ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+        STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+        TBLPROPERTIES ('avro.schema.literal'='{"type": "record", "name": "TradeRecord", "fields": [{"name": "p", "type": "double"}, {"name": "exchange", "type": "string"}, {"name": "crypto_pair", "type": "string"}, {"name": "t", "type": "long"}, {"name": "v", "type": "double"}]}')
+    
+[2023-12-23T16:27:40.350+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to success. Terminating instance.
+[2023-12-23T16:27:40.352+0000] {process_utils.py:131} INFO - Sending Signals.SIGTERM to group 4807. PIDs of all processes in the group: [4807]
+[2023-12-23T16:27:40.353+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGTERM to group 4807
+[2023-12-23T16:28:40.357+0000] {process_utils.py:149} WARNING - process psutil.Process(pid=4807, name='airflow task runner: batch_layer consume_data manual__2023-12-23T16:27:27.933699+00:00 68', status='sleeping', started='16:27:29') did not respond to SIGTERM. Trying SIGKILL
+[2023-12-23T16:28:40.358+0000] {process_utils.py:86} INFO - Sending the signal Signals.SIGKILL to group 4807
+[2023-12-23T16:28:40.362+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=4807, name='airflow task runner: batch_layer consume_data manual__2023-12-23T16:27:27.933699+00:00 68', status='terminated', exitcode=<Negsignal.SIGKILL: -9>, started='16:27:29') (4807) terminated with exit code Negsignal.SIGKILL
+[2023-12-23T16:28:40.363+0000] {standard_task_runner.py:175} ERROR - Job 68 was killed before it finished (likely due to running out of memory)

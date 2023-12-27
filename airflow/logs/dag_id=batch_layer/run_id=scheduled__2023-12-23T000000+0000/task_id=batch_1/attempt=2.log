@@ -1,0 +1,38 @@
+[2023-12-24T18:21:29.810+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:21:29.815+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [queued]>
+[2023-12-24T18:21:29.816+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2023-12-24T18:21:29.828+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_1> on 2023-12-23 00:00:00+00:00
+[2023-12-24T18:21:29.832+0000] {standard_task_runner.py:60} INFO - Started process 444 to run task
+[2023-12-24T18:21:29.835+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_1', 'scheduled__2023-12-23T00:00:00+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmp9dpzxm66']
+[2023-12-24T18:21:29.837+0000] {standard_task_runner.py:88} INFO - Job 12: Subtask batch_1
+[2023-12-24T18:21:29.863+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_1 scheduled__2023-12-23T00:00:00+00:00 [running]> on host c0475b589502
+[2023-12-24T18:21:29.899+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-23T00:00:00+00:00'
+[2023-12-24T18:21:29.953+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-24T18:21:30.001+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-24T18:21:30.075+0000] {logging_mixin.py:188} INFO - Empty DataFrame
+Columns: []
+Index: []
+[2023-12-24T18:21:30.075+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/BatchLayerDag.py", line 27, in batch_1
+    b1.batch_proc_1()
+  File "/opt/airflow/dags/batch_proc_1.py", line 50, in batch_proc_1
+    df_filtered = df[df['crypto_pair'].notna()]
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: 'crypto_pair'
+[2023-12-24T18:21:30.084+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=batch_layer, task_id=batch_1, execution_date=20231223T000000, start_date=20231224T182129, end_date=20231224T182130
+[2023-12-24T18:21:30.092+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 12 for task batch_1 ('crypto_pair'; 444)
+[2023-12-24T18:21:30.128+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2023-12-24T18:21:30.136+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

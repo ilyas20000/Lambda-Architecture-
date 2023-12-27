@@ -1,0 +1,25 @@
+[2023-12-26T18:30:01.130+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: batch_layer.batch_2 manual__2023-12-26T18:22:49.187475+00:00 [queued]>
+[2023-12-26T18:30:01.136+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: batch_layer.batch_2 manual__2023-12-26T18:22:49.187475+00:00 [queued]>
+[2023-12-26T18:30:01.136+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 2
+[2023-12-26T18:30:01.148+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): batch_2> on 2023-12-26 18:22:49.187475+00:00
+[2023-12-26T18:30:01.155+0000] {standard_task_runner.py:60} INFO - Started process 2458 to run task
+[2023-12-26T18:30:01.157+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'batch_layer', 'batch_2', 'manual__2023-12-26T18:22:49.187475+00:00', '--job-id', '59', '--raw', '--subdir', 'DAGS_FOLDER/BatchLayerDag.py', '--cfg-path', '/tmp/tmpo8b9z826']
+[2023-12-26T18:30:01.159+0000] {standard_task_runner.py:88} INFO - Job 59: Subtask batch_2
+[2023-12-26T18:30:01.189+0000] {task_command.py:423} INFO - Running <TaskInstance: batch_layer.batch_2 manual__2023-12-26T18:22:49.187475+00:00 [running]> on host ba237c0dfd1a
+[2023-12-26T18:30:01.242+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='batch_layer' AIRFLOW_CTX_TASK_ID='batch_2' AIRFLOW_CTX_EXECUTION_DATE='2023-12-26T18:22:49.187475+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-26T18:22:49.187475+00:00'
+[2023-12-26T18:30:01.292+0000] {hive.py:475} INFO - USE `finnhub_db`
+[2023-12-26T18:30:01.337+0000] {hive.py:475} INFO - 
+                SELECT *
+                FROM finnhub_table
+            
+[2023-12-26T18:30:01.677+0000] {logging_mixin.py:188} INFO -          date        s  max_price  min_price
+0  2023-12-25  BINANCE   43694.01  2268.2400
+1  2023-12-26     AAPL     193.80   193.0715
+2  2023-12-26     AMZN     153.90   153.4050
+3  2023-12-26  BINANCE   42749.48  2224.0500
+4  2023-12-26     MSFT     375.53   374.4800
+[2023-12-26T18:30:01.680+0000] {logging_mixin.py:188} INFO - File '/tmp/batchViews/parquet_output_2.parquet' already exists.
+[2023-12-26T18:30:01.707+0000] {python.py:201} INFO - Done. Returned value was: None
+[2023-12-26T18:30:01.711+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=batch_layer, task_id=batch_2, execution_date=20231226T182249, start_date=20231226T183001, end_date=20231226T183001
+[2023-12-26T18:30:01.732+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2023-12-26T18:30:01.740+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
